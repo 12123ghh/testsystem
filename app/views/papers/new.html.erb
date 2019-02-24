@@ -1,0 +1,33 @@
+<% provide(:title,"new paper") %>
+<h1>new paper</h1>
+<%= form_for @paper do |p| %>
+  <%= p.label :title,"paper title" %>
+  <%= p.text_field :title ,class:'form-control' %>
+  <%= p.label :subject %>
+  <%= p.select :subject, options_for_select([["shuxue","shuxue"],["yuwen","yuwen"],["yingyu","yingyu"]]),{},class:'form-control'  %>
+  <% 5.times do |times| %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+      	<h3 class="panel-title">di<%= times+1 %>ti</h3>
+      </div>
+      <div class="panel-body">
+        <%= p.fields_for :questions, @paper.questions do |questions| %>
+	      <%= questions.label :title,"question title" %>
+	      <%= questions.text_field :title ,class:'form-control'%>
+
+	      <%= p.fields_for :options, @paper.options do |options| %>
+	      	<%= options.label :content ,"optionA" %>
+	      	<%= options.text_field :content %>
+	      	<%= options.label :content ,"optionB" %>
+	      	<%= options.text_field :content %>
+	      	<%= options.label :content ,"optionC" %>
+	      	<%= options.text_field :content %>
+	      	<%= options.label :content ,"optionD" %>
+	      	<%= options.text_field :content %>
+	      <% end %>
+  	    <% end %>
+  	  </div>
+    </div>
+  <% end %>
+  <%= p.submit %>
+<% end %>

@@ -1,0 +1,13 @@
+<% provide(:title,'all user') %>
+<h1>用户列表</h1>
+<%= will_paginate %>
+  <ul class="users">
+  	<% @users.each do |user| %>
+  	  <li>
+   	<!-- <%= gravatar_for user,size:50 %> -->
+  	  	<%= user.name %>
+  	  	|<%= link_to "deleted",user,method:deleted,data{confirm"You sure?"} %>
+  	  </li>	
+  	<% end %>
+  </ul>
+<%= will_paginate %>
