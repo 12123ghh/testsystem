@@ -7,7 +7,7 @@ class Admin::SessionsController < ApplicationController
   	user=User.admin.find_by(email:params[:session][:email].downcase)
   	if user&&user.authenticate(params[:session][:password])
   	  log_in(user)
-  	  redirect_to @admin
+  	  redirect_to admin_admin_user_path(user)
   	else
   	  flash.now[:danger]='invalid email/password/role combination'
   	  render 'new'

@@ -29,6 +29,12 @@ Rails.application.routes.draw do
   end
 
   namespace :teacher do
+    resources :teacher_users do
+      member do
+        get :edit_password 
+        post :update_password
+      end
+    end
     resources :papers
     resources :sessions
   end
