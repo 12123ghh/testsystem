@@ -1,6 +1,7 @@
 class PapersController < ApplicationController
 
   def new
+  @user=User.new
  	@paper=Paper.new
  	@paper.questions.build
   @paper.options.build
@@ -8,11 +9,7 @@ class PapersController < ApplicationController
 
   def create
     @paper=Paper.new(paper_params)
-    if @paper.save
-
-    else
-
-    end	
+    @paper.save
   end
 
   def show
@@ -21,7 +18,7 @@ class PapersController < ApplicationController
 
   private
   def paper_params
-    params.require(:paper).permit(:title,:subject,:question_number,
-      questions_attributes: [:title,:options_attributes=>[:content]])
+    params.require(:paper).permit(:title,:subject,
+      questions_attributes:[:title,options_attributes:[:content]])
   end
 end

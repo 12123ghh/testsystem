@@ -1,16 +1,16 @@
-<% provide(:title,"login") %>
-<h1>LOGIN</h1>
+<% provide(:title,"admin login") %>
+<%= render 'admin/layouts/header' %>
+<h1>Admin login</h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-  	<%= form_for(:session,url: login_path) do |f| %>
+  	<%= form_for(:session,url: admin_sessions_path) do |f| %>
   	  <%= f.label :email %>
   	  <%= f.email_field :email ,class: 'form-control' %>
 
   	  <%= f.label :password %>
   	  <%= f.password_field :password ,class: 'form-control' %>
-      <%= f.select :role ,options_for_select([["student","student"],["teacher","teacher"],["admin","admin"]]),{},{class:'form-control'} %>
   	  <%= f.submit "Log in" ,class: "btn btn-primary" %>
   	<% end %>
-  	<p>New user?<%= link_to "sign up now!",signup_path %></p>
+<!--   	<p>New user?<%= link_to "sign up now!",signup_path %></p> -->
   </div>
 </div>
