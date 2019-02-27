@@ -1,12 +1,18 @@
 <% provide(:title,'all teachers') %>
 <%= render 'admin/layouts/header' %>
-<h1>用户列表</h1>
-  <ul class="users">
-  	<% @users.each do |user| %>
-  	  <li>
-  	  	<%= user.name %>
-  	  	|<%= link_to "detail" , admin_teacher_path(user) %>
-  	  	|<%= link_to "deleted",admin_teachers_path(user),method: :deleted ,data:{confirm:"You sure?"} %>
-  	  </li>	
-  	<% end %>
-  </ul>
+<h1>teacher list</h1>
+  <div>
+	  <table class="table">
+	  	<thead>
+	  		<th>name</th><th>email</th><th>detail</th><th>delete</th>
+	  	</thead>
+	  	<% @users.each do |user| %>
+	  		<tr>
+	  			<td><%= user.name %></td>
+	  			<td><%= user.email %></td>
+	  			<td><%= link_to "detail" , admin_teacher_path(user) %></td>
+	  			<td><%= link_to "delete", admin_teacher_path(user), method: :delete,data:{confirm: "You sure?"} %></td>
+	  		</tr>
+	  	<% end %>
+	  </table>
+  </div>

@@ -1,12 +1,18 @@
 <% provide(:title,'all papers') %>
 <%= render 'admin/layouts/header' %>
-<h1>用户列表</h1>
-  <ul class="users">
-  	<% @papers.each do |paper| %>
-  	  <li>
-  	  	<%= paper.title %>
-  	  	|<%= link_to "detail" , admin_paper_path(paper) %>
-  	  	|<%= link_to "deleted",admin_papers_path(paper),method: :deleted,data:{confirm:"You sure?"} %>
-  	  </li>	
-  	<% end %>
-  </ul>
+<h1>PaperList</h1>
+  <div>
+	  <table class="table">
+	  	<thead>
+	  		<th>title</th><th>subject</th><th>detail</th><th>delete</th>
+	  	</thead>
+	  	<% @papers.each do |paper| %>
+	  		<tr>
+	  			<td><%= paper.title %></td>
+	  			<td><%= paper.subject %></td>
+	  			<td><%= link_to "detail" , admin_paper_path(paper) %></td>
+	  			<td><%= link_to "delete",admin_paper_path(paper), method: :delete,data:{confirm:"You sure?"} %></td>
+	  		</tr>
+	  	<% end %>
+	  </table>
+  </div>

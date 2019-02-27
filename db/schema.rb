@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_081110) do
+ActiveRecord::Schema.define(version: 2019_02_27_034123) do
 
   create_table "options", force: :cascade do |t|
     t.text "content"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_02_25_081110) do
     t.datetime "updated_at", null: false
     t.text "title"
     t.integer "user_id"
+    t.integer "review"
     t.index ["user_id"], name: "index_papers_on_user_id"
   end
 

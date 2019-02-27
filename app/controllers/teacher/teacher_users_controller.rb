@@ -38,7 +38,8 @@ class Teacher::TeacherUsersController < ApplicationController
   end
 
   def update_password
-  	if @user.update_attribute(password_params)
+  	@user=User.find(params[:id])
+  	if @user.update_attributes(password_params)
   	  flash[:success]="success!"
   	  redirect_to teacher_teacher_user_path(@user)
   	else

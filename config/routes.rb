@@ -24,7 +24,13 @@ Rails.application.routes.draw do
     resources :admin_users
     resources :teachers
     resources :students
-    resources :papers
+    resources :papers do
+      member do
+        get :review
+        get :editreview
+        post :updatereview
+      end
+    end
     resources :sessions
   end
 
