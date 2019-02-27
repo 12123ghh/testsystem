@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(version: 2019_02_27_112815) do
     t.index ["paper_id"], name: "index_questions_on_paper_id"
   end
 
+  create_table "testquestions", force: :cascade do |t|
+    t.text "question"
+    t.text "anwser"
+    t.text "optionA"
+    t.text "optionB"
+    t.text "optionC"
+    t.text "optionD"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
