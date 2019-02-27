@@ -4,8 +4,8 @@
   	<nav>
   	  <ul class="nav navbar-nav navbar-right">
   	  	<% if logged_in?&&@user.student? %>
-          <li><%= link_to "paper",'#' %></li>
-          <li><%= link_to "recored",'#' %></li>
+          <li><%= link_to "link1",'#' %></li>
+          <li><%= link_to "link2",'#' %></li>
           <li><%= link_to "link3",'#' %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
@@ -21,8 +21,8 @@
             </ul>
           </li>
         <% elsif logged_in?&&@user.teacher? %>
-          <li><%= link_to "New paper",newpaper_path %></li>
-          <li><%= link_to "My paper",'#' %></li>
+          <li><%= link_to "link1",'#' %></li>
+          <li><%= link_to "link2",'#' %></li>
           <li><%= link_to "link3",'#' %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
@@ -38,9 +38,9 @@
             </ul>
           </li>
   	  	<% elsif logged_in?&&@user.admin? %>
-          <li><%= link_to "Student",'#' %></li>
-          <li><%= link_to "Teacher",'#' %></li>
-          <li><%= link_to "All paper",'#' %></li>
+          <li><%= link_to "link1",'#' %></li>
+          <li><%= link_to "link2",'#' %></li>
+          <li><%= link_to "link3",'#' %></li>
           <li><%= link_to "All user" ,users_path %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" >

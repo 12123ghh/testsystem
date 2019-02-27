@@ -13,29 +13,7 @@ Rails.application.routes.draw do
   post '/edit',to:'users#update'
   get '/users' ,to:'users#index'
 
-  get '/newpaper' ,to:'papers#new'
-  post '/newpaper',to:'papers#create'
-
   resources :users
   resources :papers
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-  namespace :admin do
-    resources :admin_users
-    resources :teachers
-    resources :students
-    resources :papers
-    resources :sessions
-  end
-
-  namespace :teacher do
-    resources :teacher_users do
-      member do
-        get :edit_password 
-        post :update_password
-      end
-    end
-    resources :papers
-    resources :sessions
-  end
 end

@@ -1,5 +1,5 @@
 class Paper < ApplicationRecord
-  belongs_to :creater, optional: true
+  belongs_to :creater
   has_many :questions
   has_many :options ,through: :questions
   accepts_nested_attributes_for :questions

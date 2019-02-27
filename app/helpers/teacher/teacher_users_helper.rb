@@ -1,2 +1,0 @@
-module Teacher::TeacherUsersHelper
-end
