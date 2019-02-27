@@ -1,0 +1,8 @@
+#创建正确答案表 belongs to questions，options
+
+create raightanwser do |t|
+
+  t.reference: :questions ,index: true
+  t.reference: :options
+
+end
