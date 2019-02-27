@@ -1,0 +1,11 @@
+<% provide(:title,'check papers') %>
+<%= render 'admin/layouts/header' %>
+<h1>Check paper</h1>
+  <ul class="users">
+  	<% @papers.each do |paper| %>
+  	  <li>
+  	  	<%= paper.title %>
+  	  	|<%= link_to "check" , editreview_admin_paper_path(paper) %>
+  	  </li>	
+  	<% end %>
+  </ul>

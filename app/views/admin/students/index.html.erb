@@ -1,0 +1,18 @@
+<% provide(:title,'all students') %>
+<%= render 'admin/layouts/header' %>
+<h1>student list</h1>
+  <div>
+	  <table class="table">
+	  	<thead>
+	  		<th>name</th><th>email</th><th>detail</th><th>delete</th>
+	  	</thead>
+	  	<% @users.each do |user| %>
+	  		<tr>
+	  			<td><%= user.name %></td>
+	  			<td><%= user.email %></td>
+	  			<td><%= link_to "detail" , admin_student_path(user) %></td>
+	  			<td><%= link_to "delete", admin_student_path(user), method: :delete,data:{confirm: "You sure?"} %></td>
+	  		</tr>
+	  	<% end %>
+	  </table>
+  </div>
