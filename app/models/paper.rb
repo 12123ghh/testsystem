@@ -1,9 +1,7 @@
 class Paper < ApplicationRecord
-  belongs_to :creater, optional: true
+  belongs_to :creator, class_name: "User"
   has_many :questions
-  has_many :options ,through: :questions
-  accepts_nested_attributes_for :questions
-  accepts_nested_attributes_for :options
+  has_many :exams
 
-  enum review:{check:0,spass:1,fpass:2}
+  enum review: {check:0,spass:1,fpass:2}
 end

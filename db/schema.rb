@@ -10,13 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_034123) do
+ActiveRecord::Schema.define(version: 2019_02_27_112815) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "exam_id"
+    t.integer "question_id"
+    t.text "content"
+    t.float "accuracy", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_right_answer", default: false
+    t.index ["exam_id"], name: "index_answers_on_exam_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "paper_id"
+    t.datetime "finished_at"
+    t.integer "state", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["paper_id"], name: "index_exams_on_paper_id"
+    t.index ["user_id"], name: "index_exams_on_user_id"
+  end
 
   create_table "options", force: :cascade do |t|
     t.text "content"
     t.integer "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_right_answer", default: false
     t.index ["question_id"], name: "index_options_on_question_id"
   end
 
@@ -30,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_02_27_034123) do
     t.text "title"
     t.integer "user_id"
     t.integer "review"
+    t.integer "creator_id"
+    t.index ["creator_id"], name: "index_papers_on_creator_id"
     t.index ["user_id"], name: "index_papers_on_user_id"
   end
 
