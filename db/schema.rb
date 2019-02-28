@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_112815) do
+ActiveRecord::Schema.define(version: 2019_02_28_110000) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "exam_id"
     t.integer "question_id"
-    t.text "content"
-    t.float "accuracy", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_right_answer", default: false
+    t.integer "option_id"
     t.index ["exam_id"], name: "index_answers_on_exam_id"
+    t.index ["option_id"], name: "index_answers_on_option_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
