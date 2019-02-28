@@ -8,7 +8,8 @@ class Admin::StudentsController < ApplicationController
   end
 
   def index
-  	@users=User.student.all
+  
+  	@users=User.student.paginate(page:params[:page],:per_page=>2)
   end
 
   def destroy
