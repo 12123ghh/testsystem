@@ -35,5 +35,5 @@ Exam.create!(user: student, paper: paper)
 exam = student.exams.first
 
 paper.questions.each do |q|
-  exam.answers.create!(question: q, content: q.options.first.content)
+  exam.answers.create!(question: q, option: q.options.first)
 end
