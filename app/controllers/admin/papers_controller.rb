@@ -4,25 +4,27 @@ class Admin::PapersController < ApplicationController
   end
 
   def show
-  	@paper=Paper.find(params[:id])
+  	@paper=Paper.find(params[:id])   
   end
 
   def index
-  	@papers=Paper.spass.paginate(page:params[:page],:per_page=>2)
+  	@papers=Paper.paginate(page:params[:page])
   end
 
   def review
-  	@papers=Paper.check.paginate(page:params[:page],:per_page=>2)
+  	@papers=Paper.check.paginate(page:params[:page])
   end
 
   def editreview
   	@paper=Paper.find(params[:id])
   end
+
   def updatereview
   	@paper=Paper.check.find(params[:id])
-  	if @paper.update_attributes(review_params)
+
+  	if @paper.update_attributes(review: params[:review])
   		flash[:success]="success"
-  		redirect_to review_admin_paper_path
+  		redirect_to admin_papers_path
   	else
   		
   	end

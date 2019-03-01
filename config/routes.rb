@@ -22,8 +22,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :admin_users
-    resources :teachers
-    resources :students
+    resources :teachers do
+      member do
+        post :change_status
+      end
+    end
+    resources :students do
+      member do
+        post :change_status
+      end
+    end
     resources :papers do
       member do
         get :review
