@@ -49,7 +49,14 @@ Rails.application.routes.draw do
         post :update_password
       end
     end
-    resources :papers
+    resources :papers do 
+      member do
+        get :new_paper
+        post :create_paper
+        get :new_question
+        post :create_question
+      end
+    end
     resources :sessions
   end
 end

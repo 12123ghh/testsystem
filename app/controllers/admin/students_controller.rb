@@ -8,7 +8,6 @@ class Admin::StudentsController < ApplicationController
   end
 
   def index
-  
   	@users=User.student.paginate(page:params[:page])
   end
 

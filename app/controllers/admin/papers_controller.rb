@@ -26,7 +26,8 @@ class Admin::PapersController < ApplicationController
   		flash[:success]="success"
   		redirect_to admin_papers_path
   	else
-  		
+  		flash[:danger]="error"
+      redirect_to admin_papers_path
   	end
 
   end
