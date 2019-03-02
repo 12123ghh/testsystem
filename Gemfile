@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://gems.ruby-china.com'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.3.7'
@@ -8,6 +8,7 @@ gem 'rails', '~> 5.2.1'
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt', '3.1.11'
 gem 'jquery-rails', '4.1.1'
+gem 'execjs', '2.7.0'
 gem 'will_paginate',  '3.1.0'
 gem 'bootstrap-will_paginate'
 # Use sqlite3 as the database for Active Record
