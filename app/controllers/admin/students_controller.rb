@@ -8,8 +8,18 @@ class Admin::StudentsController < ApplicationController
   end
 
   def index
-  
-  	@users=User.student.paginate(page:params[:page],:per_page=>2)
+  	@users=User.student.paginate(page:params[:page])
+  end
+
+  def change_status
+    @user=User.find(params[:id])
+    if @user.update_attributes(status: params[:status])
+      flash[:success]="success"
+      redirect_to admin_students_path
+    else
+      flash[:danger]="error"
+      redirect_to admin_students_path
+    end
   end
 
   def destroy

@@ -6,6 +6,16 @@
   	  <h1>
   	  	<%= @paper.title %>|<%= @paper.subject %>
   	  </h1>
+  	  <% @paper.questions.each do |question| %>
+	  	  <div>
+		  	  <p><%= question.title %></p>
+		  	  <ul>
+		  	  	<% question.options.each do |option| %> 
+		  	  	<li class=""><%= option.content %><%= "(right)" if option.is_right_answer %></li>
+		  	  	<% end %>
+		  	  </ul>
+	  	  </div>
+			<% end %>
   	</section>
   </aside>
 </div>

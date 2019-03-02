@@ -22,8 +22,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :admin_users
-    resources :teachers
-    resources :students
+    resources :teachers do
+      member do
+        post :change_status
+      end
+    end
+    resources :students do
+      member do
+        post :change_status
+      end
+    end
     resources :papers do
       member do
         get :review
@@ -41,7 +49,12 @@ Rails.application.routes.draw do
         post :update_password
       end
     end
-    resources :papers
+    resources :papers do 
+      member do
+        get :new_question
+        post :create_question
+      end
+    end
     resources :sessions
   end
 end

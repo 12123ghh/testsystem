@@ -4,13 +4,20 @@
   <div>
 	  <table class="table">
 	  	<thead>
-	  		<th>name</th><th>email</th><th>detail</th><th>delete</th>
+	  		<th>name</th><th>email</th><th>detail</th><th>status</th><th>delete</th>
 	  	</thead>
 	  	<% @users.each do |user| %>
 	  		<tr>
 	  			<td><%= user.name %></td>
 	  			<td><%= user.email %></td>
 	  			<td><%= link_to "detail" , admin_teacher_path(user) %></td>
+	  			<td><%= user.status %>|
+	  				<% if user.enable? %>
+	  					<%= link_to "disable", change_status_admin_teacher_path(user, status: "disable") , method: :post %>
+	  				<% else %>
+	  					<%= link_to "enable", change_status_admin_teacher_path(user, status: "enable"), method: :post %>
+	  				<% end %>
+	  			</td>
 	  			<td><%= link_to "delete", admin_teacher_path(user), method: :delete,data:{confirm: "You sure?"} %></td>
 	  		</tr>
 	  	<% end %>

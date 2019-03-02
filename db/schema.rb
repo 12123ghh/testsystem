@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_28_110000) do
+ActiveRecord::Schema.define(version: 2019_03_01_061149) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "exam_id"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_110000) do
     t.datetime "updated_at", null: false
     t.text "title"
     t.integer "user_id"
-    t.integer "review"
+    t.integer "review", default: 0
     t.integer "creator_id"
     t.index ["creator_id"], name: "index_papers_on_creator_id"
     t.index ["user_id"], name: "index_papers_on_user_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_110000) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.integer "role", default: 0, null: false
+    t.integer "status", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

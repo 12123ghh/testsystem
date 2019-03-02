@@ -14,7 +14,8 @@ admin = User.admin.find_by(email: "admin@example.com")
 teacher = User.teacher.find_by(email: "teacher@example.com")
 student = User.student.find_by(email: "student@example.com")
 
-Paper.create!(subject: "数学", question_number: 20, total_points: 100, title: "数学考试", creator: teacher)
+Paper.create!(subject: "数学", question_number: 20, total_points: 100,
+ title: "数学考试", creator: teacher)
 
 paper = Paper.find_by(title: "数学考试")
 20.times do |t|

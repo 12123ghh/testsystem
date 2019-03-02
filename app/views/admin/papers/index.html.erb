@@ -4,14 +4,19 @@
   <div>
 	  <table class="table">
 	  	<thead>
-	  		<th>title</th><th>subject</th><th>detail</th><th>delete</th>
+	  		<th>title</th><th>subject</th><th>status</th><th>detail</th><th>delete</th>
 	  	</thead>
 	  	<% @papers.each do |paper| %>
 	  		<tr>
 	  			<td><%= paper.title %></td>
 	  			<td><%= paper.subject %></td>
+	  			<td><%= paper.review %>
+	  				<% if paper.check? %>
+	  					|<%= link_to "pass" , updatereview_admin_paper_path(paper, review: "spass"), method: :post %>
+	  				<% end %>
+	  			</td>
 	  			<td><%= link_to "detail" , admin_paper_path(paper) %></td>
-	  			<td><%= link_to "delete",admin_paper_path(paper), method: :delete,data:{confirm:"You sure?"} %></td>
+	  			<td><%= link_to "delete" ,admin_paper_path(paper), method: :delete,data:{confirm:"You sure?"} %></td>
 	  		</tr>
 	  	<% end %>
 	  </table>
