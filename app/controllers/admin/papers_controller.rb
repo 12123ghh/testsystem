@@ -1,4 +1,6 @@
-class Admin::PapersController < ApplicationController
+class Admin::PapersController < Admin::BaseController
+  before_action :require_admin 
+
   def new
   	@paper=Paper.new
   end
@@ -42,4 +44,5 @@ class Admin::PapersController < ApplicationController
   def review_params
   	params.require(:paper).permit(:review)
   end
+
 end

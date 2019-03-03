@@ -1,4 +1,6 @@
-class Admin::TeachersController < ApplicationController
+class Admin::TeachersController < Admin::BaseController
+  before_action :require_admin
+  
   def new
   	@user=User.new
   end

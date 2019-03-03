@@ -13,6 +13,7 @@
 	  			<td><%= paper.review %>
 	  				<% if paper.check? %>
 	  					|<%= link_to "pass" , updatereview_admin_paper_path(paper, review: "spass"), method: :post %>
+	  					|<%= link_to "nopass" , updatereview_admin_paper_path(paper, review: "fpass"), method: :post %>
 	  				<% end %>
 	  			</td>
 	  			<td><%= link_to "detail" , admin_paper_path(paper) %></td>
