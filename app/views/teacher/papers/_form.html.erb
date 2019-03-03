@@ -1,0 +1,16 @@
+<%= form_for @paper, url: teacher_papers_path(@paper) do |f| %>
+	<div class="field">
+		<%= f.label :titel %>
+		<%= f.text_field :title %>
+		<%= f.label :subject %>
+		<%= f.select :subject, options_for_select([["数学","数学"], ["语文","语文"], ["英语","英语"]]) %>
+	</div>
+
+	<%= f.fields_for :questions do |builder| %>
+		<%= render 'question_fields', f: builder %>
+	<% end %>
+	<%= link_to_add_fields "Add question", f, :questions %>
+	<div class="action">
+		<%= f.submit %>
+	</div>
+<% end %>

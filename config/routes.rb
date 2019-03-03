@@ -51,8 +51,8 @@ Rails.application.routes.draw do
     end
     resources :papers do 
       member do
-        get :new_question
-        post :create_question
+        get :new_questions
+        post :create_questions
       end
     end
     resources :sessions
