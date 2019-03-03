@@ -16,6 +16,10 @@ class PapersController < ApplicationController
   	
   end
 
+  def index
+    @papers = Paper.spass.all.paginate(page: params[:page])
+  end
+
   private
   def paper_params
     params.require(:paper).permit(:title,:subject,

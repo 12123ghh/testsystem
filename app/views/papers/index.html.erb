@@ -1,0 +1,19 @@
+<%= render 'layouts/header' %>
+<h1>PaperList</h1>
+<div>
+  <table class="table">
+  	<thead>
+  		<th>title</th>
+  		<th>subject</th>
+  		<th>teacher</th>
+  	</thead>
+  	<% @papers.each do |paper| %>
+  		<tr>
+  			<td><%= paper.title %></td>
+  			<td><%= paper.subject %></td>
+  			<td><%= paper.creator.name %></td>
+  		</tr>
+  	<% end %>
+  </table>
+  <%= will_paginate @papers %>
+</div>
