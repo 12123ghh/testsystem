@@ -1,5 +1,5 @@
 class Teacher::PapersController < Teacher::BaseController
-	before_action :require_admin
+	before_action :require_teacher
 
 	def new
 		#@teacher=User.teacher.find(params[:id])	
@@ -13,7 +13,7 @@ class Teacher::PapersController < Teacher::BaseController
 		@teacher=User.teacher.first
 		@paper=Paper.new(creator: @teacher)
 		if @paper.update!(paper_params)
-			flash[:success]="success create paper"
+			flash[:success]= "success create paper"
 			redirect_to teacher_papers_path
 		else
 			flash[:danger] = "error"
@@ -22,7 +22,7 @@ class Teacher::PapersController < Teacher::BaseController
 	end
 
 	def show
-		@paper=Paper.find(params[id])
+		@paper=Paper.find(params[:id])
 	end
 
 	def edit

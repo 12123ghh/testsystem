@@ -10,16 +10,16 @@ class Admin::TeachersController < Admin::BaseController
   end
 
   def index
-  	@users=User.teacher.paginate(page:params[:page])
+  	@users=User.teacher.paginate(page: params[:page])
   end
 
   def change_status
     @user=User.find(params[:id])
     if @user.update(status: params[:status])
-      flash[:success]="success"
+      flash[:success] = "success"
       redirect_to admin_teachers_path
     else
-      flash[:danger]="error"
+      flash[:danger] = "error"
       redirect_to admin_teachers_path
     end
   end

@@ -1,5 +1,5 @@
 class Teacher::TeacherUsersController < Teacher::BaseController
-  before_action :require_admin
+  before_action :require_teacher
 
   def new
   	@user=User.new
