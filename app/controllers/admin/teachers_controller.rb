@@ -1,4 +1,6 @@
-class Admin::TeachersController < ApplicationController
+class Admin::TeachersController < Admin::BaseController
+  before_action :check_admin_login_status
+  
   def new
   	@user=User.new
   end
