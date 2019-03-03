@@ -1,10 +1,11 @@
-class PapersController < ApplicationController
+class PapersController < BaseController
+  before_action :check_user_login_status
 
   def new
-  @user=User.new
- 	@paper=Paper.new
- 	@paper.questions.build
-  @paper.options.build
+    @user=User.new
+   	@paper=Paper.new
+   	@paper.questions.build
+    @paper.options.build
   end
 
   def create
