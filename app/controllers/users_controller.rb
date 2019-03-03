@@ -1,8 +1,6 @@
-class UsersController < ApplicationController
+class UsersController < BaseController
 
-  before_action:logged_in_user,only:[:edit,:update,:index,:destroy]
-  before_action:correct_user,only:[:edit,:update]
-  before_action:admin_user,only:[:index,:destroy]
+  before_action :check_user_login_status, on: [:show, :edit, :update]
 
   def new
   	@user=User.new
