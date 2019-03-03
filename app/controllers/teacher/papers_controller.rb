@@ -1,5 +1,5 @@
 class Teacher::PapersController < Teacher::BaseController
-	before_action :require_admin
+	before_action :check_teacher_login_status
 
 	def new
 		#@teacher=User.teacher.find(params[:id])	

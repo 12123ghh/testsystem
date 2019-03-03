@@ -1,5 +1,5 @@
 class Admin::PapersController < Admin::BaseController
-  before_action :require_admin 
+  before_action :check_admin_login_status 
 
   def new
   	@paper=Paper.new
