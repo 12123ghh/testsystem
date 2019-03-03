@@ -16,8 +16,6 @@
   	  <%= f.label :password_confirmation,"password_confirmation" %>
   	  <%= f.password_field :password_confirmation,class:'form-control' %>
 
-      <%= f.select :role ,options_for_select([["student","student"],["teacher","teacher"],["admin","admin"]]),{},{class:'form-control'} %>
-
   	  <%= f.submit "OK" ,class:"btn btn-primary" %>
   	<% end %>
   </div>
