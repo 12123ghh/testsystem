@@ -1,0 +1,22 @@
+<%= render 'layouts/header' %>
+<h1><%= @exam.paper.title %>|<%= @exam.paper.subject  %>|student name: <%= @exam.user.name %></h1>
+<div>
+	<% @exam.answers.each do |answer| %>
+		<p><%= answer.question.title %></p>
+		<ul>
+			<% answer.question.options.each do |option| %>
+				<% if option.is_right_answer %>
+					<li><%= option.content + "(right)" %></li>
+				<% else %>
+					<li><%= option.content %></li>
+				<% end %>
+			<% end %>
+		</ul>
+		<% if answer.option %>
+			<p><%= "you choice:" + answer.option.content %></p>
+		<% else %>
+			<p>you has not do this question</p>
+		<% end %>
+	<% end %>
+	<p>point:<%= @exam.calculate_score %></p>
+</div>
