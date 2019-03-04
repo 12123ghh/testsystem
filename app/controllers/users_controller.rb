@@ -7,7 +7,7 @@ class UsersController < BaseController
   end
 
   def show
-  	@user=User.find(params[:id])
+  	@user=current_user
   end
 
   def create
@@ -22,13 +22,14 @@ class UsersController < BaseController
   end
 
   def edit
-    
+    @user = current_user
   end
 
   def update
-
-    if @user.update_atrributes(user_params)
-      
+    @user = current_user
+    if @user.update(user_params)
+      flash[:success] = "success"
+      redirect_to user_path
     else
       
     end

@@ -1,25 +1,21 @@
 <% provide(:title,"edit") %>
 <%= render 'layouts/header' %>
 <h1>uodate your profile</h1>
-<div class="row">
-  <div class="col-md6 col-md-offset-3">
-  	<%= form_for(@user) do |f| %>
-  	  <%= render 'shared/error_messages', object: @user %>
-  	  <%=f.label :name %>
-  	  <%=f.text_field :name ,class:'form-controller'%>
-  	  <%=f.label :email %>
-  	  <%=f.text_field :email ,class:'form-controller'%>
-  	  <%=f.label :password %>
-  	  <%=f.text_field :password ,class:'form-controller'%>
+<div class="col-md6 col-md-offset-3">
+	<%= form_for (@user) do |f| %>
+	  <%= render 'shared/error_messages', object: @user %>
+	  <%=f.label :name %>
+	  <%=f.text_field :name ,class:'form-controller'%>
+	  <%=f.label :email %>
+	  <%=f.text_field :email ,class:'form-controller'%>
+    <button type="button" class="btn btn-primary" data-toggle="collapse" 
+    data-target="#demo">change password</button>
+    <div id="demo" class="collapse">
+      <%=f.label :password %>
+      <%=f.password_field :password ,class:'form-controller'%>
   	  <%=f.label :password_confirmation ,"password_confirmation" %>
-  	  <%=f.text_field :password_confirmation ,class:'form-controller'%>
-
-  	  <%=f.submit "Save changes" ,class:'btn btn-primary'%>
-<!-- 
-  	  <div class="gravatar_edit">
-  	  	<%= gravatar_for @user %>
-  	  	<a href="http:/gravatar.com/emails" target="_blank">Change</a>
-  	  </div> -->
-  	<% end %>
-  </div>
+  	  <%=f.password_field :password_confirmation ,class:'form-controller'%>
+    </div>
+	  <%=f.submit "Save changes" ,class:'btn btn-primary'%>
+	<% end %>
 </div>
