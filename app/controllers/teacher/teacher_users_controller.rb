@@ -1,5 +1,5 @@
 class Teacher::TeacherUsersController < Teacher::BaseController
-  before_action :check_teacher_login_status
+  before_action :check_teacher_login_status, only: [:show, :edit, :update, :edit_password, :update_password]
 
   def new
   	@user=User.new

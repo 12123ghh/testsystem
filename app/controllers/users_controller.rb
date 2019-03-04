@@ -1,6 +1,6 @@
 class UsersController < BaseController
 
-  before_action :check_user_login_status, on: [:show, :edit, :update]
+  before_action :check_user_login_status, only: [:show, :edit, :update]
 
   def new
   	@user=User.new
