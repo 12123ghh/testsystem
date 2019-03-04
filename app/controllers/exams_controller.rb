@@ -23,6 +23,6 @@ class ExamsController < BaseController
 	private 
 
 	def exam_params
-		params.require(:exam).permit(answer_attributes: [:option_id])
+		params.require(:exam).permit(answers_attributes: [:option_id, :question_id])
 	end
 end

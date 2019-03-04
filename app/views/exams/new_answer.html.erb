@@ -8,8 +8,7 @@
 			<% a.object.question.options.each do |option| %>
 				<li>
 					<%= a.hidden_field :question_id %>
-					<%= a.hidden_field :exam_id %>
-					<% option.content %>
+					<%= option.content %>
 					<%= a.radio_button :option_id, option.id %>
 				</li>
 			<% end %>
