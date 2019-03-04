@@ -6,12 +6,16 @@
   		<th>title</th>
   		<th>subject</th>
   		<th>teacher</th>
+      <th>exam</th>
   	</thead>
   	<% @papers.each do |paper| %>
   		<tr>
   			<td><%= paper.title %></td>
   			<td><%= paper.subject %></td>
   			<td><%= paper.creator.name %></td>
+        <td>
+          <%= link_to "examinate", create_exam_paper_path(paper), method: :post %>
+        </td>
   		</tr>
   	<% end %>
   </table>

@@ -34,16 +34,6 @@ class UsersController < BaseController
     end
   end
 
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success]="User deleted"
-    redirect_to users_url
-  end
-  
-  def index
-    @users=User.paginate(page:params[:page],:per_page=>5)
-  end
-
   private
   
   def user_params
@@ -51,20 +41,5 @@ class UsersController < BaseController
       							 :password_confirmation)	
   end
 
-  def logged_in_user
-    unless logged_in?
-      flash[:danger]="please log in."
-      redirect_to login_url
-    end
-  end
-
-  def correct_user
-    @user=User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
-  end
-
-  def admin_user
-    redirect_to(root_url) unless current_user.admin?
-  end
 
 end

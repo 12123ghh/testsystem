@@ -17,7 +17,17 @@ Rails.application.routes.draw do
   post '/newpaper',to:'papers#create'
 
   resources :users
-  resources :papers
+  resources :papers do
+    member do
+      post :create_exam
+    end
+  end
+  resources :exams do
+    member do
+      get :new_answer
+      post :create_answer
+    end
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do

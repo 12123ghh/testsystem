@@ -1,0 +1,18 @@
+<%= form_for @exam ,url: create_answer_exam_path(@exam), method: :post do |f| %>
+	<h1><%= @exam.paper.title %>|<%= @exam.paper.subject %></h1>
+	<%= f.fields_for :answers do |a| %>
+		<p>
+			<%= a.object.question.title %>
+		</p>
+		<ul>
+			<% a.object.question.options.each do |option| %>
+				<li>
+					<%= a.hidden_field :question_id %>
+					<%= option.content %>
+					<%= a.radio_button :option_id, option.id %>
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+	<%= f.submit %>
+<% end %>

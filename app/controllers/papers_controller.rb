@@ -8,17 +8,23 @@ class PapersController < BaseController
     @paper.options.build
   end
 
-  def create
-    @paper=Paper.new(paper_params)
-    @paper.save
-  end
-
   def show
   	
   end
 
   def index
     @papers = Paper.spass.all.paginate(page: params[:page])
+  end
+
+  def create_exam
+    paper = Paper.find(params[:id])
+    @exam = Exam.new(user: current_user, paper: paper)
+    if @exam.save
+      redirect_to new_answer_exam_path(@exam)
+    else
+      flash[:danger] = "create exam error!"
+      redirect_to papers_path
+    end
   end
 
   private
