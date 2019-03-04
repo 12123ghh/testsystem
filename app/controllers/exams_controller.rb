@@ -20,6 +20,14 @@ class ExamsController < BaseController
 		end
 	end
 
+	def show
+		@exam = current_user.exams.find(params[:id])
+	end
+
+	def index
+		@exams = current_user.exams
+	end
+
 	private 
 
 	def exam_params

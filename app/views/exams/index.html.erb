@@ -1,0 +1,7 @@
+<%= render 'layouts/header' %>
+<% @exams.each do |exam| %>
+	<p>
+		<%= exam.paper.title %>
+		|<%= link_to "detial" , exam_path(exam) %>
+	</p>
+<% end %>
