@@ -21,7 +21,7 @@ class ExamsController < BaseController
 	end
 
 	def show
-		@exam = Exam.find(params[:id])
+		@exam = current_user.exam.find(params[:id])
 	end
 
 	def index
