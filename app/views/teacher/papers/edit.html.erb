@@ -1,2 +1,5 @@
 <%= render 'teacher/layouts/header' %>
-<%= render 'form' %>
+<h1>edit paper</h1>
+<%= form_for @paper, url: teacher_paper_path(@paper)  do |builder| %>
+<%= render 'form', f: builder %>
+<% end %>
