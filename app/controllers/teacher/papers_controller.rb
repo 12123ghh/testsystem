@@ -45,9 +45,8 @@ class Teacher::PapersController < Teacher::BaseController
 	end
 
   def destroy
-  	if condition
+  	if Paper.find(params[:id]).destroy
   		flash[:success] = "destroy paper"
-  		Paper.find(params[:id]).destroy
   		redirect_to  teacher_papers_path 
   	else
   		flash[:danger] = "destroy paper error!"
