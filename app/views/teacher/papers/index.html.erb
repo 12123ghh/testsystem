@@ -1,11 +1,11 @@
 <%= render 'teacher/layouts/header' %>
-
-<table>
+<h1>paper list</h1>
+<table class="table">
 	<thead>
 		<th>title</th>
 		<th>subject</th>
 		<th>status</th>
-		<th>edit</th>
+		<th>edit/detail</th>
 		<th>destroy</th>
 	</thead>
 	<% @papers.each do |paper| %>
@@ -13,8 +13,15 @@
 			<td><%= paper.title %></td>
 			<td><%= paper.subject %></td>
 			<td><%= paper.review %></td>
-			<td><%= link_to "edit", edit_teacher_paper_path(paper) %></td>
+			<td>
+				<% if paper.check? || paper.spass? %>
+					<%= link_to "detail", teacher_paper_path(paper) %>
+				<% else %>
+					<%= link_to "edit", edit_teacher_paper_path(paper) %>
+				<% end %>
+			</td>
 			<td><%= link_to "delete", teacher_paper_path(paper), method: :delete, data: { confirm: "are you sure?"} %></td>
 		</tr>
 	<% end %>
 </table>
+<%= will_paginate @papers %>

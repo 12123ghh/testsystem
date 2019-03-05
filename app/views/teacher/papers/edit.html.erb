@@ -1,35 +1,3 @@
 <%= render 'teacher/layouts/header' %>
 <h1>edit paper</h1>
-<%= form_for @paper, url: teacher_paper_path(@paper)  do |f| %>
-	<div class="field">
-		<%= f.label :titel %>
-		<%= f.text_field :title %>
-		<%= f.label :subject %>
-		<%= f.select :subject, options_for_select([["数学","数学"], ["语文","语文"], ["英语","英语"]]) %>
-	</div>
-
-	<%= f.fields_for :questions do |question| %>
-		<fieldset>
-			<%= question.label :title, "Question" %><br>
-			<%= question.text_area :title %>
-			<%= question.check_box :_destroy %><br>
-			<%= question.label :_destroy, "remove question" %>
-
-			<%= question.fields_for :options do |option| %>
-				<fieldset>
-					<%= option.label :content, "Option" %><br>
-					<%= option.text_field :content %><br>
-					<%= option.label :is_right_answer, "is_right_answer?" %><br>
-				  <%= option.check_box :is_right_answer %>
-					<%= option.hidden_field :_destroy %>
-					<%= link_to "remove", '#', class: "remove_fields" %>
-				</fieldset>
-			<% end %>
-			<%= link_to_add_fields "Add option", question, :options %>
-		</fieldset>
-	<% end %>
-	<%= link_to_add_fields "Add question", f, :questions %>
-	<div class="action">
-		<%= f.submit %>
-	</div>
-<% end %>
+<%= render 'form', paper: @paper %>

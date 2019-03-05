@@ -1,0 +1,15 @@
+<%= render 'teacher/layouts/header' %>
+<h1>Title:<%= @paper.title %>|Subject:<%= @paper.subject %></h1>
+<% @paper.questions.each do |question| %>
+	<div>
+		<span>Question:<%= question.title %></span>
+		<ul>
+			<% question.options.each do |option| %>
+				<li>
+					<%= option.content %>
+					<%= "|right" if option.is_right_answer? %>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
