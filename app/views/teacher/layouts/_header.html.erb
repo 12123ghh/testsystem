@@ -26,11 +26,11 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "my detail" ,teacher_teacher_user_path(current_user) %></li>
-              <li><%= link_to "change password" ,edit_password_teacher_teacher_user_path(current_user) %></li>
+              <li><%= link_to "my detail", teacher_teacher_user_path %></li>
+              <li><%= link_to "setting" , edit_teacher_teacher_user_path %></li>
               <li class="divider"></li>
               <li>
-                <%= link_to "Log out", teacher_session_path(current_user), method:"delete" %>
+                <%= link_to "Log out", logout_path, method:"delete" %>
               </li>
             </ul>
           </li>
