@@ -1,5 +1,14 @@
 <%= render 'layouts/header' %>
 <h1>PaperList</h1>
+
+<%= search_form_for @q do |f| %>
+  <%= f.label :subject_cont, "Subject" %>
+  <%= f.search_field :subject_cont %>
+  <%= f.label :creator_name_cont, "Teacher name" %>
+  <%= f.search_field :creator_name_cont %>
+  <%= f.submit %> 
+<% end %>
+
 <div>
   <table class="table">
   	<thead>
