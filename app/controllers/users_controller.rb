@@ -31,7 +31,7 @@ class UsersController < BaseController
       flash[:success] = "success"
       redirect_to user_path
     else
-      
+      render 'edit'
     end
   end
 
