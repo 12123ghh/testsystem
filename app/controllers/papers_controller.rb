@@ -13,7 +13,8 @@ class PapersController < BaseController
   end
 
   def index
-    @papers = Paper.spass.all.paginate(page: params[:page])
+    @q = Paper.spass.ransack(params[:q])
+    @papers = @q.result(distinct: true).paginate(page: params[:page])
   end
 
   def create_exam
