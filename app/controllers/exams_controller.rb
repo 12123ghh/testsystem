@@ -25,7 +25,7 @@ class ExamsController < BaseController
 	end
 
 	def index
-		@exams = current_user.exams
+		@exams = current_user.exams.paginate(page: params[:page])
 	end
 
 	private 
