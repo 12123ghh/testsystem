@@ -9,14 +9,14 @@ Rails.application.routes.draw do
   get '/login',   to:'sessions#new'
   post '/login',  to:'sessions#create'
   delete '/logout', to:'sessions#destroy'
-  get '/edit', to:'users#edit'
+  get '/user/edit', to:'users#edit'
   post '/edit',to:'users#update'
   get '/users' ,to:'users#index'
 
   get '/newpaper' ,to:'papers#new'
   post '/newpaper',to:'papers#create'
 
-  resources :users
+  resource :user
   resources :papers do
     member do
       post :create_exam
