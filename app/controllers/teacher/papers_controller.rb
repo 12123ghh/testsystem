@@ -20,16 +20,16 @@ class Teacher::PapersController < Teacher::BaseController
 	end
 
 	def show
-		@paper = Paper.find(params[:id])
+		@paper = current_user.papers.find(params[:id])
 	end
 
 	def edit
-		@paper = Paper.find(params[:id])
+		@paper = current_user.papers.find(params[:id])
 		@questions = @paper.questions
 	end
 
 	def update
-		@paper = Paper.find(params[:id])
+		@paper = current_user.papers.find(params[:id])
 		if @paper.update_attributes(paper_params)
 			flash[:success] = "success change"
 			redirect_to teacher_paper_path
@@ -40,12 +40,11 @@ class Teacher::PapersController < Teacher::BaseController
 	end
 
 	def index
-		@teacher = current_user
-		@papers = @teacher.papers.paginate(page: params[:page])
+		@papers = current_user.papers.paginate(page: params[:page])
 	end
 
   def destroy
-  	if Paper.find(params[:id]).destroy
+  	if current_user.papers.find(params[:id]).destroy
   		flash[:success] = "destroy paper"
   		redirect_to  teacher_papers_path 
   	else
