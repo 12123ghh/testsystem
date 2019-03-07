@@ -10,11 +10,10 @@ class Teacher::PapersController < Teacher::BaseController
 	def create
 		teacher = current_user
 		@paper = Paper.new(creator: teacher)
-		if @paper.update(paper_params)
+		if @paper.save(paper_params)
 			flash[:success] = "success create paper"
 			redirect_to teacher_papers_path
 		else
-			flash[:danger] = "error"
 			render 'new'
 		end
 	end
@@ -31,11 +30,10 @@ class Teacher::PapersController < Teacher::BaseController
 	def update
 		@paper = current_user.papers.find(params[:id])
 		if @paper.update_attributes(paper_params)
-			flash[:success] = "success change"
-			redirect_to teacher_paper_path
+			flash[:success] = "success change, waitting for check."
+			redirect_to teacher_papers_path
 		else
-			flash[:danger] = "update error"
-			rander 'update'
+			render 'edit'
 		end
 	end
 
@@ -57,6 +55,6 @@ class Teacher::PapersController < Teacher::BaseController
 
 	def paper_params
 		params.require(:paper).permit(:title, :subject, :questions_number,
-			questions_attributes: [:id, :title, :_destory, options_attributes: [:id, :content, :is_right_answer, :_destory]])
+			questions_attributes: [:id, :title, :_destroy, options_attributes: [:id, :content, :is_right_answer, :_destroy]])
 	end
 end

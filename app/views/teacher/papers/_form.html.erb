@@ -1,4 +1,14 @@
 <%= form_for [:teacher, paper]  do |f| %>
+  <% if @paper.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@paper.errors.count, "error") %> prohibited this paper from being saved:</h2>
+      <ul>
+      <% @paper.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 	<div class="field">
 		<%= f.label :titel %>
 		<%= f.text_field :title %>
