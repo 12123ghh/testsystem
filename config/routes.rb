@@ -53,12 +53,7 @@ Rails.application.routes.draw do
   end
 
   namespace :teacher do
-    resources :teacher_users do
-      member do
-        get :edit_password 
-        post :update_password
-      end
-    end
+    resource :teacher_user
     resources :papers do 
       member do
         get :new_questions
