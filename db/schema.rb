@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_01_061149) do
+ActiveRecord::Schema.define(version: 2019_03_07_134357) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "exam_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2019_03_01_061149) do
     t.integer "user_id"
     t.integer "review", default: 0
     t.integer "creator_id"
+    t.integer "level", default: 0
     t.index ["creator_id"], name: "index_papers_on_creator_id"
     t.index ["user_id"], name: "index_papers_on_user_id"
   end
