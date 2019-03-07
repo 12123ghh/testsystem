@@ -2,9 +2,9 @@
 <h1>PaperList</h1>
 
 <%= search_form_for @q do |f| %>
-  <%= f.label :subject_cont, "Subject" %>
+  <%= f.label :subject_cont, "科目" %>
   <%= f.search_field :subject_cont %>
-  <%= f.label :creator_name_cont, "Teacher name" %>
+	<%= f.label :creator_name_cont, "出题老师" %>
   <%= f.search_field :creator_name_cont %>
   <%= f.submit %> 
 <% end %>
@@ -12,18 +12,20 @@
 <div>
   <table class="table">
   	<thead>
-  		<th>title</th>
-  		<th>subject</th>
-  		<th>teacher</th>
-      <th>exam</th>
+  		<th>试卷标题</th>
+  		<th>科目</th>
+			<th><%= sort_link(@q, :level, "难易度", default_order: :desc) %></th>
+  		<th>出题教师</th>
+      <th>考试</th>
   	</thead>
   	<% @papers.each do |paper| %>
   		<tr>
   			<td><%= paper.title %></td>
   			<td><%= paper.subject %></td>
+        <td><%= paper.level %></td>
   			<td><%= paper.creator.name %></td>
         <td>
-          <%= link_to "examinate", create_exam_paper_path(paper), method: :post %>
+          <%= link_to "我要考试", create_exam_paper_path(paper), method: :post %>
         </td>
   		</tr>
   	<% end %>

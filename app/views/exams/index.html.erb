@@ -2,14 +2,20 @@
 <h1>Your exams recored</h1>
 <table class="table">
 	<thead>
-		<th>paper</th>
-		<th>subject</th>
+		<th>试卷标题</th>
+  	<th>科目</th>
+		<th>难易度</th>
+  	<th>出题教师</th>
+  	<th>得分</th>
 		<th>detail</th>
 	</thead>
 	<% @exams.each do |exam| %>
 		<tr>
 			<td><%= exam.paper.title %></td>
 			<td><%= exam.paper.subject %></td>
+			<td><%= exam.paper.level %></td>
+			<td><%= exam.paper.creator.name %></td>
+			<td><%= exam.calculate_score %></td>
 			<td><%= link_to "detail", exam_path(exam)  %></td>
 		</tr>
 	<% end %>

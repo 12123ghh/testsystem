@@ -59,7 +59,7 @@ class Teacher::PapersController < Teacher::BaseController
 	private 
 
 	def paper_params
-		params.require(:paper).permit(:title, :subject, :questions_number,
+		params.require(:paper).permit(:title, :subject, :level, :questions_number,
 			questions_attributes: [:id, :title, :_destroy, options_attributes: [:id, :content, :is_right_answer, :_destroy]])
 	end
 end
