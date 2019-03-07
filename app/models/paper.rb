@@ -3,6 +3,9 @@ class Paper < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :exams
 
+  validates :title, presence: true, length: {maximum: 100}
+  validates :subject, presence: true
+
   accepts_nested_attributes_for :questions, allow_destroy: true
 
   enum review: {check:0,spass:1,fpass:2}
