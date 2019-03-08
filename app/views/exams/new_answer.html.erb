@@ -1,12 +1,14 @@
 <%= render "layouts/header" %>
-<h1>Testing...</h1>
+<h1>考试中</h1>
 <%= form_for @exam ,url: create_answer_exam_path(@exam), method: :post do |f| %>
-	<h1><%= @exam.paper.title %>|<%= @exam.paper.subject %></h1>
-	<ol>
-		<%= f.fields_for :answers do |a| %>
-			<li>
-				<p><%= a.object.question.title %></p>
-				<ol type="A">
+	<h1><%= @exam.paper.title %>|<%= @exam.paper.subject.name %></h1>
+	<%= f.fields_for :answers do |a| %>
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<%= a.object.question.title %>
+			</div>
+		  <div class="panel-body">
+		  	<ol type="A">
 					<% a.object.question.options.each do |option| %>
 						<li>
 							<%= a.hidden_field :question_id %>
@@ -15,8 +17,8 @@
 						</li>
 					<% end %>
 				</ol>
-			</li>
-		<% end %>
-	</ol>
-	<%= f.submit %>
+		  </div>
+		</div>
+	<% end %>
+	<%= f.submit "交卷", class: "btn btn-primary" %>
 <% end %>

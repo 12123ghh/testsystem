@@ -1,22 +1,28 @@
 <%= render 'layouts/header' %>
-<h1><%= @exam.paper.title %>|<%= @exam.paper.subject  %>|student name: <%= @exam.user.name %></h1>
+<h1><%= @exam.paper.title %></h1>
+<h2><%= @exam.paper.subject.name %></h2>
+<h2>考生姓名： <%= @exam.user.name %></h2>
+<p>正确率：<%= @exam.calculate_score %>%</p>
 <div>
 	<% @exam.answers.each do |answer| %>
-		<p><%= answer.question.title %></p>
-		<ul>
-			<% answer.question.options.each do |option| %>
-				<% if option.is_right_answer %>
-					<li><%= option.content + "(right)" %></li>
+		<div class="panel <%= answer.option&.is_right_answer ? "panel-success" : "panel-danger" %>">
+			<div class="panel-heading">
+				<%= answer.question.title %>
+			</div>
+		  <div class="panel-body">
+		  	<ul>
+					<% answer.question.options.each do |option| %>
+						<li><%= option.content %></li>
+					<% end %>
+				</ul>
+		  </div>
+		  <div class="panel-footer">
+		  	<% if answer.option %>
+		  		<%= "你的选择是：#{answer.option.content} " %>
 				<% else %>
-					<li><%= option.content %></li>
+					未作答
 				<% end %>
-			<% end %>
-		</ul>
-		<% if answer.option %>
-			<p><%= "you choice:" + answer.option.content %></p>
-		<% else %>
-			<p>you has not do this question</p>
-		<% end %>
+		  </div>
+		</div>
 	<% end %>
-	<p>point:<%= @exam.calculate_score %></p>
 </div>

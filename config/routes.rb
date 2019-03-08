@@ -31,7 +31,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
-    resources :admin_users
+    root "students#index"
+    resource :admin_user
     resources :teachers do
       member do
         post :change_status
@@ -43,22 +44,27 @@ Rails.application.routes.draw do
       end
     end
     resources :papers do
+      get :review, on: :collection
+
       member do
-        get :review
         get :editreview
         post :updatereview
       end
     end
     resources :sessions
+    resources :subjects
   end
 
   namespace :teacher do
+    root "teacher_users#show"
     resource :teacher_user
     resources :papers do 
       member do
         get :new_questions
         post :create_questions
         get :stu_exams
+        get :select_questions
+        post :update_questions
       end
     end
     resources :sessions

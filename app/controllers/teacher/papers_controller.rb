@@ -9,10 +9,10 @@ class Teacher::PapersController < Teacher::BaseController
 
 	def create
 		teacher = current_user
-		@paper = Paper.new(creator: teacher)
-		if @paper.save(paper_params)
+		@paper = teacher.papers.new(paper_params)
+		if @paper.save
 			flash[:success] = "success create paper"
-			redirect_to teacher_papers_path
+			redirect_to teacher_paper_path(@paper)
 		else
 			render 'new'
 		end
@@ -31,7 +31,7 @@ class Teacher::PapersController < Teacher::BaseController
 		@paper = current_user.papers.find(params[:id])
 		if @paper.update_attributes(paper_params)
 			flash[:success] = "success change, waitting for check."
-			redirect_to teacher_papers_path
+			redirect_to teacher_paper_path(@paper)
 		else
 			render 'edit'
 		end
@@ -51,6 +51,22 @@ class Teacher::PapersController < Teacher::BaseController
   	end
   end
 
+  def select_questions
+    @paper = current_user.papers.find(params[:id])
+    @questions = @paper.subject.questions.public_send(@paper.level)
+  end
+
+  def update_questions
+    @paper = current_user.papers.find(params[:id])
+    if @paper.update(paper_questions_params)
+      flash[:success] = "成功更换试题"
+      redirect_to teacher_paper_path(@paper)
+    else
+      @questions = @paper.subject.questions.public_send(@paper.level)
+      render :select_questions
+    end
+  end
+
   def stu_exams
   	@paper = Paper.find(params[:id])
 		@exams = @paper.exams.paginate(page: params[:page])
@@ -59,7 +75,10 @@ class Teacher::PapersController < Teacher::BaseController
 	private 
 
 	def paper_params
-		params.require(:paper).permit(:title, :subject, :level, :questions_number,
-			questions_attributes: [:id, :title, :_destroy, options_attributes: [:id, :content, :is_right_answer, :_destroy]])
+		params.require(:paper).permit(:title, :subject_id, :level, :question_number)
 	end
+
+  def paper_questions_params
+    params.require(:paper).permit(question_ids: [])
+  end
 end

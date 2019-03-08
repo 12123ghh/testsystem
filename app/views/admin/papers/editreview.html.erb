@@ -2,7 +2,7 @@
 <%= render 'admin/layouts/header' %>
 <h1>Check paper</h1>
   <ul class="users">
-  	  	<%= @paper.title %>|<%= @paper.subject %>
+  	  	<%= @paper.title %>|<%= @paper.subject.name %>
   </ul>
   <%= form_for @paper ,url:{action:'updatereview'} ,method: :post do |f| %>
   	<%= f.select :review ,options_for_select([["Ok","spass"],["Bad","fpass"]]),{},class:'form-control' %>

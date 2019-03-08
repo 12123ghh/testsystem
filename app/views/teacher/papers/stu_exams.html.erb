@@ -12,7 +12,7 @@
 		<% if exam.user != nil %>
 		<tr>
 			<td><%= exam.paper.title %></td>
-			<td><%= exam.paper.subject %></td>
+			<td><%= exam.paper.subject.name %></td>
 			<td><%= exam.user.name %></td>
 			<td><%= exam.calculate_score %></td>
 			<td><%= link_to "look up", "#" %></td>
