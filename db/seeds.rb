@@ -18,28 +18,37 @@ subject = Subject.create!(name: "语文")
 Subject.create!(name: "数学")
 Subject.create!(name: "英语")
 
-subject.papers.create!(question_number: 20, total_points: 100,
- title: "数学考试", creator: teacher)
+Question.levels.keys.each do |level|
+  20.times do |q_t|
+    question = Question.create!(
+      subject: subject,
+      title: "【#{subject.name}】#{level}_考试试题_#{q_t+1}",
+      level: level)
 
-paper = Paper.find_by(title: "数学考试")
-20.times do |t|
-  question = paper.questions.create!({
-    subject: subject,
-    title: "数学考试试题_#{t+1}"
-  })
-
-  question.options.create!([
-    {content: "试题_#{t+1}_答案_1", is_right_answer: true},
-    {content: "试题_#{t+1}_答案_2"},
-    {content: "试题_#{t+1}_答案_3"},
-    {content: "试题_#{t+1}_答案_4"}
-  ])
+    question.options.create!([
+      {content: "答案_1", is_right_answer: true},
+      {content: "答案_2"},
+      {content: "答案_3"},
+      {content: "答案_4"}
+    ])
+  end
 end
 
-Exam.create!(user: student, paper: paper)
+Paper.levels.keys.each do |level|
+  paper = Paper.create!(
+    subject: subject,
+    level: level,
+    question_number: 20,
+    total_points: 100,
+    creator: teacher,
+    title: "【#{subject.name}】#{level}_考试试卷")
+
+  paper.generate_questions
+end
+
+Exam.create!(user: student, paper: Paper.first)
 
 exam = student.exams.first
-
-paper.questions.each do |q|
+Paper.first.questions.each do |q|
   exam.answers.create!(question: q, option: q.options.first)
 end

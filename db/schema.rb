@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_133108) do
+ActiveRecord::Schema.define(version: 2019_03_08_141258) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "exam_id"
@@ -61,13 +61,19 @@ ActiveRecord::Schema.define(version: 2019_03_08_133108) do
     t.index ["user_id"], name: "index_papers_on_user_id"
   end
 
+  create_table "papers_questions", force: :cascade do |t|
+    t.integer "paper_id"
+    t.integer "question_id"
+    t.index ["paper_id"], name: "index_papers_questions_on_paper_id"
+    t.index ["question_id"], name: "index_papers_questions_on_question_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.text "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "paper_id"
     t.integer "subject_id"
-    t.index ["paper_id"], name: "index_questions_on_paper_id"
+    t.integer "level", default: 0
     t.index ["subject_id"], name: "index_questions_on_subject_id"
   end
 
