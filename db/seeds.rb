@@ -14,13 +14,18 @@ admin = User.admin.find_by(email: "admin@example.com")
 teacher = User.teacher.find_by(email: "teacher@example.com")
 student = User.student.find_by(email: "student@example.com")
 
-Paper.create!(subject: "数学", question_number: 20, total_points: 100,
+subject = Subject.create!(name: "语文")
+Subject.create!(name: "数学")
+Subject.create!(name: "英语")
+
+subject.papers.create!(question_number: 20, total_points: 100,
  title: "数学考试", creator: teacher)
 
 paper = Paper.find_by(title: "数学考试")
 20.times do |t|
   question = paper.questions.create!({
-    title: "数学考试试题_#{t+1}",
+    subject: subject,
+    title: "数学考试试题_#{t+1}"
   })
 
   question.options.create!([

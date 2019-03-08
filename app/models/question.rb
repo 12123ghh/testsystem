@@ -1,5 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :paper
+  belongs_to :subject
+
   has_many :options, dependent: :destroy
   has_many :answers
 
