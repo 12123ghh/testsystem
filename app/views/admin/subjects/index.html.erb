@@ -1,0 +1,26 @@
+<% provide(:title,'all students') %>
+<%= render 'admin/layouts/header' %>
+<h1>学生列表</h1>
+<%= link_to "创建科目", new_admin_subject_path %>
+<table class="table">
+  <thead>
+    <th>科目</th>
+    <th>试卷数量</th>
+    <th>题库数量</th>
+    <th>操作</th>
+  </thead>
+  <% @subjects.each do |subject| %>
+    <tr>
+      <td><%= subject.name %></td>
+      <td><%= subject.papers.count %></td>
+      <td><%= subject.questions.count %></td>
+      <td>
+        <% if subject.can_be_edit_or_destroy? %>
+          <%= link_to "编辑" , edit_admin_subject_path(subject) %> | 
+          <%= link_to "删除" , admin_subject_path(subject), method: :delete, data: {confirm: "确认删除？"} %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @subjects %>
