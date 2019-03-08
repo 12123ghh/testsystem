@@ -3,7 +3,7 @@ class Admin::SubjectsController < Admin::BaseController
   before_action :find_resource, except: [:index, :new, :create]
 
   def index
-    @subjects = Subject.all.paginate(page: params[:page])
+    @subjects = Subject.all.order(created_at: :desc).paginate(page: params[:page])
   end
 
   def new

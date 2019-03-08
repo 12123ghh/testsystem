@@ -1,0 +1,8 @@
+<fieldset>
+  <%= f.label :content, "候选项" %><br>
+  <%= f.text_field :content %><br>
+  <%= f.check_box :is_right_answer %>
+  <%= f.label :is_right_answer, "正确答案" %><br>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "移除", '#', class: "remove_fields" %>
+</fieldset>

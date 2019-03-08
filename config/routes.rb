@@ -53,6 +53,7 @@ Rails.application.routes.draw do
     end
     resources :sessions
     resources :subjects
+    resources :questions
   end
 
   namespace :teacher do

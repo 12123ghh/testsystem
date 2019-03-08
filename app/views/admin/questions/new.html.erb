@@ -1,0 +1,38 @@
+<% provide(:title,'all students') %>
+<%= render 'admin/layouts/header' %>
+<%= form_for [:admin, @question], class: "form-horizontal" do |f| %>
+  <% if @question.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@paper.errors.count, "error") %></h2>
+      <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, "题目", class: "control-label" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :subject_id, "科目", class: "control-label" %>
+    <%= f.collection_select :subject_id, Subject.all, :id, :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :level, "难易程度", class: "control-label" %>
+    <%= f.select :level, Paper.levels.keys, class: "form-control" %>
+  </div>
+
+  <%= f.fields_for :options do |builder| %>
+    <%= render 'option_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "添加候选项", f, :options %>
+
+  <div class="action">
+    <%= f.submit "提交", class: "btn btn-primary" %>
+  </div>
+<% end %>

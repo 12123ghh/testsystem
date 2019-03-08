@@ -10,7 +10,7 @@ class Admin::PapersController < Admin::BaseController
   end
 
   def index
-  	@papers=Paper.paginate(page:params[:page])
+  	@papers=Paper.all.order(created_at: :desc).paginate(page:params[:page])
   end
 
   def review
