@@ -51,6 +51,22 @@ class Teacher::PapersController < Teacher::BaseController
   	end
   end
 
+  def select_questions
+    @paper = current_user.papers.find(params[:id])
+    @questions = @paper.subject.questions.public_send(@paper.level)
+  end
+
+  def update_questions
+    @paper = current_user.papers.find(params[:id])
+    if @paper.update(paper_questions_params)
+      flash[:success] = "成功更换试题"
+      redirect_to teacher_paper_path(@paper)
+    else
+      @questions = @paper.subject.questions.public_send(@paper.level)
+      render :select_questions
+    end
+  end
+
   def stu_exams
   	@paper = Paper.find(params[:id])
 		@exams = @paper.exams.paginate(page: params[:page])
@@ -61,4 +77,8 @@ class Teacher::PapersController < Teacher::BaseController
 	def paper_params
 		params.require(:paper).permit(:title, :subject_id, :level, :question_number)
 	end
+
+  def paper_questions_params
+    params.require(:paper).permit(question_ids: [])
+  end
 end

@@ -62,6 +62,8 @@ Rails.application.routes.draw do
         get :new_questions
         post :create_questions
         get :stu_exams
+        get :select_questions
+        post :update_questions
       end
     end
     resources :sessions

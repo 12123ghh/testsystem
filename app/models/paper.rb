@@ -6,6 +6,7 @@ class Paper < ApplicationRecord
   has_many :exams
 
   validates :title, presence: true, length: {maximum: 100}
+  validate :validate_question_number
 
   accepts_nested_attributes_for :questions, allow_destroy: true
 
@@ -18,5 +19,10 @@ class Paper < ApplicationRecord
   def generate_questions
     question_ids = subject.questions.public_send(level).ids.sample(question_number).uniq
     questions << Question.find(question_ids)
+  end
+
+  private
+  def validate_question_number
+    errors.add(:question_number, "题目数量过多") if questions.count > question_number
   end
 end
