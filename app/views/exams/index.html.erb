@@ -1,5 +1,5 @@
 <%= render 'layouts/header' %>
-<h1>Your exams recored</h1>
+<h1>考试记录</h1>
 <table class="table">
 	<thead>
 		<th>试卷标题</th>
@@ -7,7 +7,7 @@
 		<th>难易度</th>
   	<th>出题教师</th>
   	<th>得分</th>
-		<th>detail</th>
+		<th>详情</th>
 	</thead>
 	<% @exams.each do |exam| %>
 		<tr>
@@ -16,7 +16,7 @@
 			<td><%= exam.paper.level %></td>
 			<td><%= exam.paper.creator.name %></td>
 			<td><%= exam.calculate_score %></td>
-			<td><%= link_to "detail", exam_path(exam)  %></td>
+			<td><%= link_to "查看", exam_path(exam)  %></td>
 		</tr>
 	<% end %>
 </table>

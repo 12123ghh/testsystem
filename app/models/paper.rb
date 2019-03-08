@@ -9,6 +9,9 @@ class Paper < ApplicationRecord
 
   accepts_nested_attributes_for :questions, allow_destroy: true
 
+  delegate :name, to: :subject, prefix: true
+  delegate :name, to: :creator, prefix: true
+
   enum review: {check: 0, spass: 1, fpass: 2 }
   enum level: {"入门": 0, "初级": 1, "中级": 2, "高级": 3}
 
