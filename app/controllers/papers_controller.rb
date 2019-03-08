@@ -14,7 +14,7 @@ class PapersController < BaseController
 
   def index
     @q = Paper.spass.ransack(params[:q])
-    @papers = @q.result(distinct: true).paginate(page: params[:page])
+    @papers = @q.result(distinct: true).order(created_at: :desc).paginate(page: params[:page])
   end
 
   def create_exam

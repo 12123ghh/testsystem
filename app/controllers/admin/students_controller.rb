@@ -10,7 +10,7 @@ class Admin::StudentsController < Admin::BaseController
   end
 
   def index
-  	@users=User.student.paginate(page:params[:page])
+  	@users=User.student.order(created_at: :desc).paginate(page:params[:page])
   end
 
   def change_status

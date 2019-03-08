@@ -10,4 +10,8 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :options, allow_destroy: true
 
   enum level: {"入门": 0, "初级": 1, "中级": 2, "高级": 3}
+
+  def can_be_destroy?
+    !(papers.exists?)
+  end
 end

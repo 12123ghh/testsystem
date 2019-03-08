@@ -38,7 +38,7 @@ class Teacher::PapersController < Teacher::BaseController
 	end
 
 	def index
-		@papers = current_user.papers.paginate(page: params[:page])
+		@papers = current_user.papers.order(created_at: :desc).paginate(page: params[:page])
 	end
 
   def destroy

@@ -14,36 +14,41 @@ admin = User.admin.find_by(email: "admin@example.com")
 teacher = User.teacher.find_by(email: "teacher@example.com")
 student = User.student.find_by(email: "student@example.com")
 
-subject = Subject.create!(name: "语文")
+Subject.create!(name: "语文")
 Subject.create!(name: "数学")
 Subject.create!(name: "英语")
 
-Question.levels.keys.each do |level|
-  20.times do |q_t|
-    question = Question.create!(
-      subject: subject,
-      title: "【#{subject.name}】#{level}_考试试题_#{q_t+1}",
-      level: level)
+Subject.all.each do |s|
+  Question.levels.keys.each do |level|
+    20.times do |q_t|
+      question = Question.create!(
+        subject: s,
+        title: "【#{s.name}】#{level}_考试试题_#{q_t+1}",
+        level: level)
 
-    question.options.create!([
-      {content: "答案_1", is_right_answer: true},
-      {content: "答案_2"},
-      {content: "答案_3"},
-      {content: "答案_4"}
-    ])
+      question.options.create!([
+        {content: "答案_1", is_right_answer: true},
+        {content: "答案_2"},
+        {content: "答案_3"},
+        {content: "答案_4"}
+      ])
+    end
   end
 end
 
-Paper.levels.keys.each do |level|
-  paper = Paper.create!(
-    subject: subject,
-    level: level,
-    question_number: 20,
-    total_points: 100,
-    creator: teacher,
-    title: "【#{subject.name}】#{level}_考试试卷")
+Subject.all.each do |s|
+  Paper.levels.keys.each do |level|
+    paper = Paper.create!(
+      subject: s,
+      level: level,
+      question_number: 20,
+      total_points: 100,
+      review: "spass",
+      creator: teacher,
+      title: "【#{s.name}】#{level}_考试试卷")
 
-  paper.generate_questions
+    paper.generate_questions
+  end
 end
 
 Exam.create!(user: student, paper: Paper.first)
