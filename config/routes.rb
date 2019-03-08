@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   end
 
   namespace :teacher do
+    root "teacher_users#show"
     resource :teacher_user
     resources :papers do 
       member do

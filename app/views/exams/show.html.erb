@@ -1,5 +1,5 @@
 <%= render 'layouts/header' %>
-<h1><%= @exam.paper.title %>|<%= @exam.paper.subject  %>|student name: <%= @exam.user.name %></h1>
+<h1><%= @exam.paper.title %>|<%= @exam.paper.subject.name  %>|student name: <%= @exam.user.name %></h1>
 <div>
 	<% @exam.answers.each do |answer| %>
 		<p><%= answer.question.title %></p>

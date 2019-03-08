@@ -12,7 +12,7 @@
 	<% @exams.each do |exam| %>
 		<tr>
 			<td><%= exam.paper.title %></td>
-			<td><%= exam.paper.subject %></td>
+			<td><%= exam.paper.subject.name %></td>
 			<td><%= exam.paper.level %></td>
 			<td><%= exam.paper.creator.name %></td>
 			<td><%= exam.calculate_score %></td>

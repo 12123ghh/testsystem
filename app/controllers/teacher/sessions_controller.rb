@@ -1,6 +1,6 @@
 class Teacher::SessionsController < Teacher::BaseController
   def new
-
+    redirect_to teacher_root_path if current_user
   end
 
   def create

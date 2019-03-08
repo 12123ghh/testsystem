@@ -1,15 +1,18 @@
 <%= render 'teacher/layouts/header' %>
-<h1>Title:<%= @paper.title %>|Subject:<%= @paper.subject %></h1>
+<h1>试卷:<%= @paper.title %></h1>
+<h2>科目:<%= @paper.subject.name %></h2>
 <% @paper.questions.each do |question| %>
-	<div>
-		<span>Question:<%= question.title %></span>
-		<ul>
-			<% question.options.each do |option| %>
-				<li>
-					<%= option.content %>
-					<%= "|right" if option.is_right_answer? %>
-				</li>
-			<% end %>
-		</ul>
+	<div class="panel panel-primary">
+	  <div class="panel-heading">题目：<%= question.title %></div>
+	  <div class="panel-body">
+	    <ul>
+				<% question.options.each do |option| %>
+					<li>
+						<%= option.content %>
+						<%= "| 正确答案" if option.is_right_answer? %>
+					</li>
+				<% end %>
+			</ul>
+	  </div>
 	</div>
 <% end %>

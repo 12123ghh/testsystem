@@ -1,7 +1,7 @@
 <%= render "layouts/header" %>
 <h1>Testing...</h1>
 <%= form_for @exam ,url: create_answer_exam_path(@exam), method: :post do |f| %>
-	<h1><%= @exam.paper.title %>|<%= @exam.paper.subject %></h1>
+	<h1><%= @exam.paper.title %>|<%= @exam.paper.subject.name %></h1>
 	<ol>
 		<%= f.fields_for :answers do |a| %>
 			<li>

@@ -9,7 +9,7 @@
 	  	<% @papers.each do |paper| %>
 	  		<tr>
 	  			<td><%= paper.title %></td>
-	  			<td><%= paper.subject %></td>
+	  			<td><%= paper.subject.name %></td>
 	  			<td><%= link_to "check" , editreview_admin_paper_path(paper) %></td>
 	  		</tr>
 	  	<% end %>
