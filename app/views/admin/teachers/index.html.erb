@@ -1,26 +1,30 @@
 <% provide(:title,'all teachers') %>
 <%= render 'admin/layouts/header' %>
-<h1>teacher list</h1>
-  <div>
-	  <table class="table">
-	  	<thead>
-	  		<th>name</th><th>email</th><th>detail</th><th>status</th><th>delete</th>
-	  	</thead>
-	  	<% @users.each do |user| %>
-	  		<tr>
-	  			<td><%= user.name %></td>
-	  			<td><%= user.email %></td>
-	  			<td><%= link_to "detail" , admin_teacher_path(user) %></td>
-	  			<td><%= user.status %>|
-	  				<% if user.enable? %>
-	  					<%= link_to "disable", change_status_admin_teacher_path(user, status: "disable") , method: :post %>
-	  				<% else %>
-	  					<%= link_to "enable", change_status_admin_teacher_path(user, status: "enable"), method: :post %>
-	  				<% end %>
-	  			</td>
-	  			<td><%= link_to "delete", admin_teacher_path(user), method: :delete,data:{confirm: "You sure?"} %></td>
-	  		</tr>
-	  	<% end %>
-	  </table>
-	  <%= will_paginate @users %>
-  </div>
+<h1>教师列表</h1>
+<div>
+  <table class="table">
+  	<thead>
+  		<th>姓名</th>
+  		<th>邮箱</th>
+  		<th>查看</th>
+  		<th>状态</th>
+  		<th>删除</th>
+  	</thead>
+  	<% @users.each do |user| %>
+  		<tr>
+  			<td><%= user.name %></td>
+  			<td><%= user.email %></td>
+  			<td><%= link_to "查看" , admin_teacher_path(user) %></td>
+  			<td><%= user.status %>|
+  				<% if user.enable? %>
+  					<%= link_to "禁用", change_status_admin_teacher_path(user, status: "disable") , method: :post %>
+  				<% else %>
+  					<%= link_to "启用", change_status_admin_teacher_path(user, status: "enable"), method: :post %>
+  				<% end %>
+  			</td>
+  			<td><%= link_to "删除", admin_teacher_path(user), method: :delete,data:{confirm: "You sure?"} %></td>
+  		</tr>
+  	<% end %>
+  </table>
+  <%= will_paginate @users %>
+</div>
