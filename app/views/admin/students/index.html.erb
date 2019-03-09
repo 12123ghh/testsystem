@@ -6,7 +6,7 @@
 		<th>姓名</th>
 		<th>邮箱</th>
 		<th>详情</th>
-		<th>状态</th>
+
 		<th>删除</th>
 	</thead>
 	<% @users.each do |user| %>
@@ -14,13 +14,7 @@
 			<td><%= user.name %></td>
 			<td><%= user.email %></td>
 			<td><%= link_to "查看" , admin_student_path(user) %></td>
-			<td><%= user.status %>|
-				<% if user.enable? %>
-					<%= link_to "禁用",  change_status_admin_student_path(user, status: "disable") , method: :post %>
-				<% else %>
-					<%= link_to "启用",  change_status_admin_student_path(user, status: "enable"), method: :post %>
-				<% end %>
-			</td>
+
 			<td><%= link_to "删除", admin_student_path(user), method: :delete,data:{confirm: "You sure?"} %></td>
 		</tr>
 	<% end %>

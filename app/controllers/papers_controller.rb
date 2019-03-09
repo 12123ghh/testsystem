@@ -13,6 +13,7 @@ class PapersController < BaseController
   end
 
   def index
+    params.require(:q).permit! if params[:q]
     @q = Paper.spass.ransack(params[:q])
     @papers = @q.result(distinct: true).order(created_at: :desc).paginate(page: params[:page])
   end

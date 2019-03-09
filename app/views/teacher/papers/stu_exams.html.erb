@@ -6,7 +6,6 @@
 		<th>subject</th>
 		<th>student</th>
 		<th>achievement</th>
-		<th>detail</th>
 	</thead>
 	<% @exams.each do |exam| %>
 		<% if exam.user != nil %>
@@ -15,7 +14,6 @@
 			<td><%= exam.paper.subject.name %></td>
 			<td><%= exam.user.name %></td>
 			<td><%= exam.calculate_score %></td>
-			<td><%= link_to "look up", "#" %></td>
 		</tr>
 		<% end %>
 	<% end %>
