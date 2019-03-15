@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  subject: MyText
-  question_number: 1
+paperone:
+  subject: :english
+  question_number: 2
   total_points: 1
-  teacher_id: 1
+  creator: :chendonghua
 
 two:
   subject: MyText

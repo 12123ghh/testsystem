@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  content: MyText
-  question: one
+optionone:
+  content: optionone
+  question_id: :questionone
+  is_right_answer: true
 
-two:
-  content: MyText
-  question: two
+optiontwo:
+  content: optiontwo
+  question_id: questionone
+  is_right_answer: true

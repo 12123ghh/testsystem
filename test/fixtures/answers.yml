@@ -1,0 +1,10 @@
+
+answerone:
+  exam: :examone
+  question: :questionone
+  is_right_answer: true
+
+answertwo:
+  exam: :examone
+  question: :questiontwo
+  is_right_answer: true
