@@ -16,6 +16,8 @@ class Paper < ApplicationRecord
   enum review: {check: 0, spass: 1, fpass: 2 }
   enum level: {"入门": 0, "初级": 1, "中级": 2, "高级": 3}
 
+  after_create :generate_questions
+
   def generate_questions
     question_ids = subject.questions.public_send(level).ids.sample(question_number).uniq
     questions << Question.find(question_ids)
