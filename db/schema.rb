@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_141258) do
+ActiveRecord::Schema.define(version: 2019_03_19_064805) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "exam_id"
@@ -74,6 +74,9 @@ ActiveRecord::Schema.define(version: 2019_03_08_141258) do
     t.datetime "updated_at", null: false
     t.integer "subject_id"
     t.integer "level", default: 0
+    t.integer "question_type"
+    t.text "standard_answer"
+    t.boolean "true_answer"
     t.index ["subject_id"], name: "index_questions_on_subject_id"
   end
 
