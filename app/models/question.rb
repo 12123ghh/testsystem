@@ -12,19 +12,26 @@ class Question < ApplicationRecord
   validate :validate_question_type
 
   enum level: {"入门": 0, "初级": 1, "中级": 2, "高级": 3}
-  enum question_type: {"单选题": 0, "填空题": 1, "判断题": 2, "简答题": 3}
+
+  #题目类型包括单选题，填空题，判断题，简答题
+  enum question_type: {"multiple_choice": 0, "sentence_completion": 1,
+     "true_or_flase_question": 2, "short_answer_question": 3}
 
   def can_be_destroy?
     !(papers.exists?)
   end
 
   private
+  #根据题目类型进行不同验证
   def validate_question_type
-    if question_type == 0 && options.count < 2
+    if self.multiple_choice? && options.count < 2
+      #单选题最少需要两个选项
       errors.add(:question_type, "单选题最少需要两个选项！")
-    elsif (question_type == 1 || 3) && (standard_answer == nil || "")
+    elsif (self.sentence_completion? || self.short_answer_question？) && standard_answer.blank?
+      #填空题，简答题标准答案不能为空
       errors.add(:standard_answer, "填空题，简答题标准答案不能为空")
-    elsif question_type == 2 && true_answer == nil
+    elsif self.true_or_flase_question? && true_answer.blank?
+      #判断题必须设置是否正确或者错误
       errors.add(:true_answer, "判断题答案未设置")
     end
   end
