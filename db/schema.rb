@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_064805) do
     t.datetime "updated_at", null: false
     t.integer "subject_id"
     t.integer "level", default: 0
-    t.integer "question_type"
+    t.integer "question_type", default: 0
     t.text "standard_answer"
     t.boolean "true_answer"
     t.index ["subject_id"], name: "index_questions_on_subject_id"
