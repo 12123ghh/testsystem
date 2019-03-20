@@ -1,0 +1,33 @@
+<% provide(:title,'判断题管理') %>
+<%= render 'admin/layouts/header' %>
+<h1>判断题列表</h1>
+<%= link_to "创建判断题", new_admin_true_or_flase_question_path %>
+<table class="table">
+  <thead>
+    <th>科目</th>
+    <th>难易度</th>
+    <th>题目</th>
+    <th>答案</th>
+    <th>操作</th>
+  </thead>
+  <% @true_or_flase_questions.each do |f| %>
+    <tr>
+      <td><%= f.subject.name %></td>
+      <td><%= f.level %></td>
+      <td><%= f.title %></td>
+      <td>
+      	<%if f.true_answer %>
+      		<%= "正确" %>
+      	<% else %>
+      		<%= "错误" %>
+      	<% end %>	
+      </td>
+      <td>
+        <% if f.can_be_destroy? %>
+          <%= link_to "删除" , admin_question_path(f), method: :delete, data: {confirm: "确认删除？"} %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @true_or_flase_questions %>
