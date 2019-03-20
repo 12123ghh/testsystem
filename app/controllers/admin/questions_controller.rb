@@ -3,7 +3,7 @@ class Admin::QuestionsController < Admin::BaseController
   before_action :find_resource, except: [:index, :new, :create]
 
   def index
-    @questions = Question.all.order(created_at: :desc).paginate(page: params[:page])
+    @questions = Question.multiple_choice.all.order(created_at: :desc).paginate(page: params[:page])
   end
 
   def new
