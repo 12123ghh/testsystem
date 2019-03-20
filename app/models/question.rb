@@ -33,7 +33,7 @@ class Question < ApplicationRecord
     elsif self.short_answer_question? && standard_answer.blank?
       #简答题标准答案不能为空
       errors.add(:standard_answer, "标准答案不能为空")
-    elsif self.true_or_flase_question? && true_answer.blank?
+    elsif self.true_or_flase_question? && true_answer.nil?
       #判断题必须设置是否正确或者错误
       errors.add(:true_answer, "判断题答案未设置")
     end
