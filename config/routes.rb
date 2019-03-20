@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :questions
     resources :sentence_completions
     resources :true_or_flase_questions
+    resources :short_answer_questions
   end
 
   namespace :teacher do
