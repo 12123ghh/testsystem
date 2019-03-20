@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     resources :sessions
     resources :subjects
     resources :questions
+    resources :sentence_completions
   end
 
   namespace :teacher do
