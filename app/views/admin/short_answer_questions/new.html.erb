@@ -1,16 +1,19 @@
-<% provide(:title,'all students') %>
+<% provide(:title,'添加填空题') %>
 <%= render 'admin/layouts/header' %>
-<%= form_for [:admin, @question], class: "form-horizontal" do |f| %>
-  <% if @question.errors.any? %>
+<%= form_for @short_answer_question, url: admin_short_answer_questions_path, 
+			class: "form-horizontal" do |f| %>
+  <% if @short_answer_question.errors.any? %>
     <div class="error_messages">
-      <h2><%= pluralize(@question.errors.count, "error") %></h2>
+      <h2><%= pluralize(@short_answer_question.errors.count, "error") %></h2>
       <ul>
-      <% @question.errors.full_messages.each do |msg| %>
+      <% @short_answer_question.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
+
+  <h1>管理简答题</h1>
 
   <div class="form-group">
     <%= f.label :title, "题目", class: "control-label" %>
@@ -27,10 +30,10 @@
     <%= f.select :level, Paper.levels.keys, class: "form-control" %>
   </div>
 
-  <%= f.fields_for :options do |builder| %>
-    <%= render 'option_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_fields "添加候选项", f, :options %>
+  <div class="form-group">
+  	<%= f.label :standard_answer, "标准答案", class: "control-label" %>
+  	<%= f.text_area :standard_answer, class: "form-control" %>
+  </div>
 
   <div class="action">
     <%= f.submit "提交", class: "btn btn-primary" %>

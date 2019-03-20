@@ -27,10 +27,13 @@ class Question < ApplicationRecord
     if self.multiple_choice? && options.count < 2
       #单选题最少需要两个选项
       errors.add(:question_type, "单选题最少需要两个选项！")
-    elsif (self.sentence_completion? || self.short_answer_question？) && standard_answer.blank?
-      #填空题，简答题标准答案不能为空
-      errors.add(:standard_answer, "填空题，简答题标准答案不能为空")
-    elsif self.true_or_flase_question? && true_answer.blank?
+    elsif self.sentence_completion? && standard_answer.blank?
+      #填空题标准答案不能为空
+      errors.add(:standard_answer, "标准答案不能为空")
+    elsif self.short_answer_question? && standard_answer.blank?
+      #简答题标准答案不能为空
+      errors.add(:standard_answer, "标准答案不能为空")
+    elsif self.true_or_flase_question? && true_answer.nil?
       #判断题必须设置是否正确或者错误
       errors.add(:true_answer, "判断题答案未设置")
     end

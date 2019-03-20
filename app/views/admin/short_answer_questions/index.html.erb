@@ -1,0 +1,27 @@
+<% provide(:title,'简答题管理') %>
+<%= render 'admin/layouts/header' %>
+<h1>简答题列表</h1>
+<%= link_to "创建简答题", new_admin_short_answer_question_path %>
+<table class="table">
+  <thead>
+    <th>科目</th>
+    <th>难易度</th>
+    <th>题目</th>
+    <th>标准答案</th>
+    <th>操作</th>
+  </thead>
+  <% @short_answer_questions.each do |short_answer_question| %>
+    <tr>
+      <td><%= short_answer_question.subject.name %></td>
+      <td><%= short_answer_question.level %></td>
+      <td><%= short_answer_question.title %></td>
+      <td><%= short_answer_question.standard_answer %></td>
+      <td>
+        <% if short_answer_question.can_be_destroy? %>
+          <%= link_to "删除" , admin_question_path(short_answer_question), method: :delete, data: {confirm: "确认删除？"} %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @short_answer_questions %>

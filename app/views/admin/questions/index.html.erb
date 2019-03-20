@@ -1,6 +1,6 @@
 <% provide(:title,'all students') %>
 <%= render 'admin/layouts/header' %>
-<h1>试题列表</h1>
+<h1>单选题列表</h1>
 <%= link_to "创建试题", new_admin_question_path %>
 <table class="table">
   <thead>
@@ -30,4 +30,4 @@
     </tr>
   <% end %>
 </table>
-<%= will_paginate @subjects %>
+<%= will_paginate @questions %>
