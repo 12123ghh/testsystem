@@ -10,6 +10,7 @@ class Question < ApplicationRecord
   accepts_nested_attributes_for :options, allow_destroy: true
 
   validate :validate_question_type
+  validate :choice_question_only_have_one_right_answer, if: :multiple_choice?
 
   enum level: {"入门": 0, "初级": 1, "中级": 2, "高级": 3}
 
@@ -21,10 +22,21 @@ class Question < ApplicationRecord
     !(papers.exists?)
   end
 
+    #单选题只能设置一个正确答案
+  def choice_question_only_have_one_right_answer
+    true_answer = 0
+    options.each do |f|
+      true_answer = true_answer + 1 if f.is_right_answer == true
+    end
+    if true_answer != 1
+      errors.add(:multiple_choice, "正确答案必须且唯一")
+    end
+  end
+
   private
   #根据题目类型进行不同验证
   def validate_question_type
-    if self.multiple_choice? && options.count < 2
+    if self.multiple_choice? && self.options.length < 2
       #单选题最少需要两个选项
       errors.add(:question_type, "单选题最少需要两个选项！")
     elsif self.sentence_completion? && standard_answer.blank?
@@ -38,4 +50,5 @@ class Question < ApplicationRecord
       errors.add(:true_answer, "判断题答案未设置")
     end
   end
+
 end
