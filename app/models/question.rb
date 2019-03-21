@@ -28,8 +28,10 @@ class Question < ApplicationRecord
     options.each do |f|
       true_answer = true_answer + 1 if f.is_right_answer == true
     end
-    if true_answer != 1
-      errors.add(:multiple_choice, "正确答案必须且唯一")
+    if true_answer < 1
+      errors.add(:multiple_choice, "请设置正确答案")
+    elsif true_answer >1
+      errors.add(:multiple_choice, "只能设置一个选项为正确答案")
     end
   end
 
