@@ -1,0 +1,8 @@
+<ol type="A">
+  <% a.object.question.options.each do |option| %>
+    <li>
+      <%= option.content %>
+      <%= a.radio_button :option_id, option.id %>
+    </li>
+  <% end %>
+</ol>

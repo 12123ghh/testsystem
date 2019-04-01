@@ -20,18 +20,25 @@ Subject.create!(name: "英语")
 
 Subject.all.each do |s|
   Question.levels.keys.each do |level|
-    20.times do |q_t|
-      question = Question.create!(
-        subject: s,
-        title: "【#{s.name}】#{level}_考试试题_#{q_t+1}",
-        level: level)
+    Question.question_types.keys.each do |q_t|
+      20.times do |t|
+        question = Question.new(
+          subject: s,
+          title: "【#{s.name}】#{level}_考试试题_#{t+1}",
+          level: level,
+          question_type: q_t,
+          standard_answer: "standard_answer",
+          true_answer: true)
 
-      question.options.create!([
-        {content: "答案_1", is_right_answer: true},
-        {content: "答案_2"},
-        {content: "答案_3"},
-        {content: "答案_4"}
-      ])
+        question.options.build([
+          {content: "答案_1", is_right_answer: true},
+          {content: "答案_2"},
+          {content: "答案_3"},
+          {content: "答案_4"}
+        ]) if question.multiple_choice?
+
+        question.save!
+      end
     end
   end
 end
@@ -45,9 +52,11 @@ Subject.all.each do |s|
       total_points: 100,
       review: "spass",
       creator: teacher,
-      title: "【#{s.name}】#{level}_考试试卷")
-
-    paper.generate_questions
+      title: "【#{s.name}】#{level}_考试试卷",
+      multiple_choice_count: 5,
+      sentence_completion_count: 5,
+      true_or_flase_question_count: 5,
+      short_answer_question_count: 2)
   end
 end
 
@@ -55,5 +64,12 @@ Exam.create!(user: student, paper: Paper.first)
 
 exam = student.exams.first
 Paper.first.questions.each do |q|
-  exam.answers.create!(question: q, option: q.options.first)
+  case q.question_type
+  when "multiple_choice"
+    exam.answers.create!(question: q, option: q.options.first)
+  when "sentence_completion" || "short_answer_question"
+    exam.answers.create!(question: q, content: q.standard_answer)
+  when "true_or_flase_question"
+    exam.answers.create!(question: q, true_answer: q.true_answer)
+  end
 end

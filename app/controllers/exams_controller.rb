@@ -4,7 +4,7 @@ class ExamsController < BaseController
 	def new_answer
 		@exam = Exam.find(params[:id])
 		@questions = @exam.paper.questions
-		@questions.each do |q|
+		@questions.order(question_type: :asc).each do |q|
 			@exam.answers.build(question: q)
 		end
 	end
@@ -31,6 +31,6 @@ class ExamsController < BaseController
 	private 
 
 	def exam_params
-		params.require(:exam).permit(answers_attributes: [:option_id, :question_id])
+		params.require(:exam).permit(answers_attributes: [:option_id, :question_id, :content, :true_answer])
 	end
 end
