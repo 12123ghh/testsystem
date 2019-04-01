@@ -3,20 +3,14 @@
 <%= form_for @exam ,url: create_answer_exam_path(@exam), method: :post do |f| %>
 	<h1><%= @exam.paper.title %>|<%= @exam.paper.subject.name %></h1>
 	<%= f.fields_for :answers do |a| %>
+		<%= "【第#{a.index+1}题】" %>
+		<%= a.hidden_field :question_id %>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<%= a.object.question.title %>
 			</div>
 		  <div class="panel-body">
-		  	<ol type="A">
-					<% a.object.question.options.each do |option| %>
-						<li>
-							<%= a.hidden_field :question_id %>
-							<%= option.content %>
-							<%= a.radio_button :option_id, option.id %>
-						</li>
-					<% end %>
-				</ol>
+		  	<%= render "#{a.object.question.question_type}_fields", a: a %>
 		  </div>
 		</div>
 	<% end %>
