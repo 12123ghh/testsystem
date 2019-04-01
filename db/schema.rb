@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_064805) do
+ActiveRecord::Schema.define(version: 2019_03_31_131918) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "exam_id"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 2019_03_19_064805) do
     t.integer "creator_id"
     t.integer "level", default: 0
     t.integer "subject_id"
+    t.integer "multiple_choice_count", default: 0
+    t.integer "sentence_completion_count", default: 0
+    t.integer "true_or_flase_question_count", default: 0
+    t.integer "short_answer_question_count", default: 0
     t.index ["creator_id"], name: "index_papers_on_creator_id"
     t.index ["subject_id"], name: "index_papers_on_subject_id"
     t.index ["user_id"], name: "index_papers_on_user_id"
