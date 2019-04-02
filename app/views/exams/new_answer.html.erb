@@ -5,6 +5,7 @@
 	<%= f.fields_for :answers do |a| %>
 		<%= "【第#{a.index+1}题】" %>
 		<%= a.hidden_field :question_id %>
+		<%= a.hidden_field :question_type %>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<%= a.object.question.title %>

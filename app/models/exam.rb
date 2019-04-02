@@ -2,7 +2,7 @@ class Exam < ApplicationRecord
   belongs_to :paper
   belongs_to :user, -> { student }
 
-  has_many :answers
+  has_many :answers, -> { order(question_type: :asc) }
   accepts_nested_attributes_for :answers
 
   enum state: {pending: 1, finished: 2, close: 3}

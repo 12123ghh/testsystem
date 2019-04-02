@@ -10,6 +10,10 @@ class Answer < ApplicationRecord
 
   scope :right_answer, -> { where(is_right_answer: true) }
 
+  #题目类型包括单选题，填空题，判断题，简答题
+  enum question_type: {"multiple_choice": 0, "sentence_completion": 1,
+     "true_or_flase_question": 2, "short_answer_question": 3}
+
   private
   def check_is_right_answer
     # 当选择了答案之后，判断是否为正确答案并保存。

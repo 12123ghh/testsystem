@@ -53,10 +53,10 @@ Subject.all.each do |s|
       review: "spass",
       creator: teacher,
       title: "【#{s.name}】#{level}_考试试卷",
-      multiple_choice_count: 5,
-      sentence_completion_count: 5,
-      true_or_flase_question_count: 5,
-      short_answer_question_count: 2)
+      multiple_choice_count: 20,
+      sentence_completion_count: 15,
+      true_or_flase_question_count: 15,
+      short_answer_question_count: 6)
   end
 end
 
@@ -66,12 +66,12 @@ exam = student.exams.first
 Paper.first.questions.each do |q|
   case q.question_type
   when "multiple_choice"
-    exam.answers.create!(question: q, option: q.options.first)
+    exam.answers.create!(question: q, question_type: q.question_type, option: q.options.first)
   when "sentence_completion"
-    exam.answers.create!(question: q, content: q.standard_answer)
+    exam.answers.create!(question: q, question_type: q.question_type, content: q.standard_answer)
   when "true_or_flase_question"
-    exam.answers.create!(question: q, true_answer: q.true_answer)
+    exam.answers.create!(question: q, question_type: q.question_type, true_answer: q.true_answer)
   when "short_answer_question"
-    exam.answers.create!(question: q, content: q.standard_answer)
+    exam.answers.create!(question: q, question_type: q.question_type, content: q.standard_answer)
   end
 end

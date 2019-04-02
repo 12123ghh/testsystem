@@ -7,21 +7,32 @@
 	<% @exam.answers.each do |answer| %>
 		<div class="panel <%= answer.option&.is_right_answer ? "panel-success" : "panel-danger" %>">
 			<div class="panel-heading">
+				<%= t("activerecord.attributes.question.question_types.#{answer.question.question_type}") %>
 				<%= answer.question.title %>
 			</div>
-		  <div class="panel-body">
-		  	<ul>
-					<% answer.question.options.each do |option| %>
-						<li><%= option.content %></li>
-					<% end %>
-				</ul>
-		  </div>
+		  <% if answer.question.multiple_choice? %>
+		  	<div class="panel-body">
+		  		<ul>
+						<% answer.question.options.each do |option| %>
+							<li><%= option.content %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+
 		  <div class="panel-footer">
-		  	<% if answer.option %>
-		  		<%= "你的选择是：#{answer.option.content} " %>
-				<% else %>
-					未作答
-				<% end %>
+		  	<p>你的答题记录是：
+			  	<% case answer.question.question_type %>
+					<% when "multiple_choice" %>
+				  	<%= answer.option&.content || "未作答" %>
+					<% when "sentence_completion" %>
+						<%= answer.content || "未作答" %>
+					<% when "true_or_flase_question" %>
+						<%= answer.true_answer || "未作答" %>
+					<% when "short_answer_question" %>
+						<%= answer.content || "未作答" %>
+					<% end %>
+				</p>
 		  </div>
 		</div>
 	<% end %>

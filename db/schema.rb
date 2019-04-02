@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_152529) do
+ActiveRecord::Schema.define(version: 2019_04_02_161317) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "exam_id"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2019_04_01_152529) do
     t.integer "option_id"
     t.text "content"
     t.boolean "true_answer"
+    t.integer "question_type", default: 0
     t.index ["exam_id"], name: "index_answers_on_exam_id"
     t.index ["option_id"], name: "index_answers_on_option_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
