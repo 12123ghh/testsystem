@@ -5,7 +5,7 @@ class ExamsController < BaseController
 		@exam = Exam.find(params[:id])
 		@questions = @exam.paper.questions
 		@questions.order(question_type: :asc).each do |q|
-			@exam.answers.build(question: q)
+			@exam.answers.build(question: q, question_type: q.question_type)
 		end
 	end
 
@@ -21,7 +21,7 @@ class ExamsController < BaseController
 	end
 
 	def show
-		@exam = current_user.exams.find(params[:id])
+		@exam = current_user.exams.includes({answers: [:option, {question: :options}]}).find(params[:id])
 	end
 
 	def index
@@ -31,6 +31,6 @@ class ExamsController < BaseController
 	private 
 
 	def exam_params
-		params.require(:exam).permit(answers_attributes: [:option_id, :question_id, :content, :true_answer])
+		params.require(:exam).permit(answers_attributes: [:option_id, :question_id, :question_type, :content, :true_answer])
 	end
 end
