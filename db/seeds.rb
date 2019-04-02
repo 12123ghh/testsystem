@@ -67,9 +67,11 @@ Paper.first.questions.each do |q|
   case q.question_type
   when "multiple_choice"
     exam.answers.create!(question: q, option: q.options.first)
-  when "sentence_completion" || "short_answer_question"
+  when "sentence_completion"
     exam.answers.create!(question: q, content: q.standard_answer)
   when "true_or_flase_question"
     exam.answers.create!(question: q, true_answer: q.true_answer)
+  when "short_answer_question"
+    exam.answers.create!(question: q, content: q.standard_answer)
   end
 end

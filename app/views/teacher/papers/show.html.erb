@@ -8,14 +8,23 @@
 	<div class="panel panel-primary">
 	  <div class="panel-heading">题目：<%= question.title %></div>
 	  <div class="panel-body">
-	    <ul>
-				<% question.options.each do |option| %>
-					<li>
-						<%= option.content %>
-						<%= "| 正确答案" if option.is_right_answer? %>
-					</li>
-				<% end %>
-			</ul>
+	  	<% case question.question_type %>
+	  	<% when "multiple_choice" %>
+		    <ul>
+					<% question.options.each do |option| %>
+						<li>
+							<%= option.content %>
+							<%= "| 正确答案" if option.is_right_answer? %>
+						</li>
+					<% end %>
+				</ul>
+			<% when "sentence_completion" %>
+				<p>正确答案：<%= question.standard_answer %></p>
+			<% when "true_or_flase_question" %>
+				<p>正确答案：<%= question.true_answer %></p>
+			<% when "short_answer_question" %>
+				<p>参考答案：<%= question.standard_answer %></p>
+			<% end %>
 	  </div>
 	</div>
 <% end %>
