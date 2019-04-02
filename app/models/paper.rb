@@ -2,7 +2,7 @@ class Paper < ApplicationRecord
   belongs_to :creator, class_name: "User"
   belongs_to :subject
 
-  has_and_belongs_to_many :questions
+  has_and_belongs_to_many :questions, -> { order(question_type: :asc) }
   has_many :exams
 
   validates :title, presence: true, length: {maximum: 100}
@@ -11,7 +11,8 @@ class Paper < ApplicationRecord
   validates_numericality_of :true_or_flase_question_count, greater_than_or_equal_to: 5
   validates_numericality_of :short_answer_question_count, greater_than_or_equal_to: 1
 
-  validate :validate_question_number, on: :update
+  validate :validate_question_number
+  validate :validate_paper_total_score
 
   accepts_nested_attributes_for :questions, allow_destroy: true
 
@@ -21,7 +22,7 @@ class Paper < ApplicationRecord
   enum review: {check: 0, spass: 1, fpass: 2 }
   enum level: {"入门": 0, "初级": 1, "中级": 2, "高级": 3}
 
-  after_create :generate_questions
+  before_create :generate_questions
 
   def generate_questions
     generate_multiple_choice_questions
@@ -32,10 +33,21 @@ class Paper < ApplicationRecord
 
   private
   def validate_question_number
-    errors.add(:multiple_choice_count, "题库中选择题数量不足或未选择足够数量") if questions.exists? && (questions.multiple_choice.size < multiple_choice_count)
-    errors.add(:sentence_completion_count, "题库中填空题题数量不足或未选择足够数量") if questions.exists? && (questions.sentence_completion.size < sentence_completion_count)
-    errors.add(:true_or_flase_question_count, "题库中判断题题数量不足或未选择足够数量") if questions.exists? && (questions.true_or_flase_question.size < true_or_flase_question_count)
-    errors.add(:short_answer_question_count, "题库中简单题题数量不足或未选择足够数量") if questions.exists? && (questions.short_answer_question.size < short_answer_question_count)
+    errors.add(:multiple_choice_count, "选择的题目数量与试卷限定不匹配") if questions.exists? && (questions.multiple_choice.size != multiple_choice_count)
+    errors.add(:sentence_completion_count, "选择的题目数量与试卷限定不匹配") if questions.exists? && (questions.sentence_completion.size != sentence_completion_count)
+    errors.add(:true_or_flase_question_count, "选择的题目数量与试卷限定不匹配") if questions.exists? && (questions.true_or_flase_question.size != true_or_flase_question_count)
+    errors.add(:short_answer_question_count, "选择的题目数量与试卷限定不匹配") if questions.exists? && (questions.short_answer_question.size != short_answer_question_count)
+  end
+
+  def validate_paper_total_score
+    multiple_choice_score = multiple_choice_count * 2
+    sentence_completion_score = sentence_completion_count
+    true_or_flase_question_score = true_or_flase_question_count
+    short_answer_question_score = short_answer_question_count * 5
+
+    if [multiple_choice_score, sentence_completion_score, true_or_flase_question_score, short_answer_question_score].sum != 100
+      errors.add(:base, "试卷总分必须为100分")
+    end
   end
 
   def generate_multiple_choice_questions

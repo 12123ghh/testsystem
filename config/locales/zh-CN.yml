@@ -1,0 +1,15 @@
+zh-CN:
+  activerecord:
+    models:
+      paper: 试卷
+      question: 试题
+      option: 候选项
+      exam: 考试记录
+      answer: 考试答题记录
+    attributes:
+      question:
+        question_types:
+          multiple_choice: 选择题
+          sentence_completion: 填空题
+          true_or_flase_question: 判断题
+          short_answer_question: 简答题

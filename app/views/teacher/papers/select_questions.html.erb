@@ -15,13 +15,19 @@
       <th>试卷标题</th>
       <th>科目</th>
       <th>难易度</th>
-      <th>试题数量</th>
+      <th>选择题数量</th>
+      <th>填空题数量</th>
+      <th>判断题数量</th>
+      <th>简答题数量</th>
     </thead>
     <tr>
       <td><%= @paper.title %></td>
       <td><%= @paper.subject.name %></td>
       <td><%= @paper.level %></td>
-      <td><%= @paper.question_number %></td>
+      <td><%= @paper.multiple_choice_count %></td>
+      <td><%= @paper.sentence_completion_count %></td>
+      <td><%= @paper.true_or_flase_question_count %></td>
+      <td><%= @paper.short_answer_question_count %></td>
     </tr>
   </table>
 
@@ -30,7 +36,10 @@
       <li class="list-group-item">
         <div class="checkbox">
           <%= b.check_box(class: "checkbox") %>
-          <label><%= b.text %></label>
+          <label>
+            <%= t("activerecord.attributes.question.question_types.#{b.object.question_type}")%>
+            <%= b.text %>
+          </label>
         </div>
       </li>
     <% end %>

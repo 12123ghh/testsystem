@@ -32,11 +32,32 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :question_number, "试题数量", class: "col-sm-2 control-label" %>
+    <%= f.label :multiple_choice_count, "选择题数量（每题2分）", class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.number_field :question_number, class: "form-control" %>
+      <%= f.number_field :multiple_choice_count, class: "form-control" %>
     </div>
-	</div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :sentence_completion_count, "填空题数量（每题1分）", class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :sentence_completion_count, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :true_or_flase_question_count, "判断题数量（每题1分）", class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :true_or_flase_question_count, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :short_answer_question_count, "简答题数量（每题5分）", class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+      <%= f.number_field :short_answer_question_count, class: "form-control" %>
+    </div>
+  </div>
 
 	<div class="action">
 		<%= f.submit "提交", class: "btn btn-primary" %>
