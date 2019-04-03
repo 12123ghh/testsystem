@@ -2,13 +2,17 @@
 <h1><%= @exam.paper.title %></h1>
 <h2><%= @exam.paper.subject.name %></h2>
 <h2>考生姓名： <%= @exam.user.name %></h2>
-<p>正确率：<%= @exam.calculate_score %>%</p>
+<p>得分：<%= @exam.calculate_score %></p>
 <div>
 	<% @exam.answers.each do |answer| %>
-		<div class="panel <%= answer.option&.is_right_answer ? "panel-success" : "panel-danger" %>">
+		<div class="panel <%= answer.is_right_answer ? "panel-success" : "panel-danger" %>">
 			<div class="panel-heading">
-				<%= t("activerecord.attributes.question.question_types.#{answer.question.question_type}") %>
-				<%= answer.question.title %>
+				<p>
+					<%= t("activerecord.attributes.question.question_types.#{answer.question.question_type}") %>
+					<%= answer.question.title %>
+				</p>
+
+				<p>得分：<%= answer.score %></p>
 			</div>
 		  <% if answer.question.multiple_choice? %>
 		  	<div class="panel-body">
