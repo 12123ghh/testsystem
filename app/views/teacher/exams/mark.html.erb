@@ -1,0 +1,36 @@
+<%= render "teacher/layouts/header" %>
+<h1>评分</h1>
+
+<%= form_for @exam, url: mark_score_teacher_paper_exam_path(@paper, @exam), method: :post do |f| %>
+  <% if @exam.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@exam.errors.count, "error") %></h2>
+      <ul>
+      <% @exam.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.fields_for :answers, @exam.short_answer_question_answers do |a| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>题目：<%= a.object.question.title %></h3>
+        <p>参考答案：<%= a.object.question.standard_answer %></p>
+      </div>
+
+      <div class="panel-body">
+        <h3>回答：</h3>
+        <p><%= a.object.content %></p>
+      </div>
+
+      <div class="panel-footer">
+        <%= a.label :score, "得分" %>
+        <%= a.select :score, (0..5).to_a %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= f.submit "提交", class: "btn btn-primary" %>
+<% end %>

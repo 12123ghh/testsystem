@@ -66,9 +66,14 @@ Rails.application.routes.draw do
       member do
         get :new_questions
         post :create_questions
-        get :stu_exams
         get :select_questions
         post :update_questions
+      end
+      resources :exams, only: [:index, :show] do
+        member do
+          get :mark
+          post :mark_score
+        end
       end
     end
     resources :sessions

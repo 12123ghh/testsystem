@@ -24,7 +24,7 @@
 				<% end %>
 			</td>
 			<td><%= link_to "删除", teacher_paper_path(paper), method: :delete, data: { confirm: "are you sure?"} %></td>
-			<td><%= link_to "考试记录 / #{paper.exams.count}", stu_exams_teacher_paper_path(paper) %></td>
+			<td><%= link_to "考试记录 / #{paper.exams.count}", teacher_paper_exams_path(paper) %></td>
 		</tr>
 	<% end %>
 </table>
