@@ -3,6 +3,7 @@ class Exam < ApplicationRecord
   belongs_to :user, -> { student }
 
   has_many :answers, -> { order(question_type: :asc) }
+  has_many :short_answer_question_answers, -> { short_answer_question.order(question_type: :asc) }, class_name: "Answer"
   accepts_nested_attributes_for :answers
 
   enum state: {pending: 1, finished: 2, close: 3}

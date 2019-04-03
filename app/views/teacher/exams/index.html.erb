@@ -1,0 +1,24 @@
+<%= render "teacher/layouts/header" %>
+<h1>考试记录</h1>
+<table class="table">
+  <thead>
+    <th>试卷</th>
+    <th>科目</th>
+    <th>学生</th>
+    <th>得分</th>
+    <th>打分</th>
+  </thead>
+  <% @exams.each do |exam| %>
+    <% if exam.user != nil %>
+    <tr>
+      <td><%= link_to exam.paper.title, teacher_paper_exam_path(@paper, exam) %></td>
+      <td><%= exam.paper.subject.name %></td>
+      <td><%= exam.user.name %></td>
+      <td><%= exam.calculate_score %></td>
+      <td><%= link_to "简答题打分", mark_teacher_paper_exam_path(@paper, exam) if exam.short_answer_question_answers.exists? %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+<%= will_paginate @exams %>
+<p><%= link_to "back", teacher_papers_path %></p>

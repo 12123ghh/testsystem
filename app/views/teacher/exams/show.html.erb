@@ -1,0 +1,44 @@
+<%= render "teacher/layouts/header" %>
+<h1><%= @exam.paper.title %></h1>
+<h2><%= @exam.paper.subject.name %></h2>
+<h2>考生姓名： <%= @exam.user.name %></h2>
+<p>得分：<%= @exam.calculate_score %></p>
+<%= link_to "简答题打分", mark_teacher_paper_exam_path(@paper, @exam) if @exam.short_answer_question_answers.exists? %>
+<div>
+  <% @exam.answers.each do |answer| %>
+    <div class="panel <%= answer.is_right_answer ? "panel-success" : "panel-default" %>">
+      <div class="panel-heading">
+        <p>
+          <%= t("activerecord.attributes.question.question_types.#{answer.question.question_type}") %>
+          <%= answer.question.title %>
+        </p>
+
+        <p>得分：<%= answer.score %></p>
+      </div>
+      <% if answer.question.multiple_choice? %>
+        <div class="panel-body">
+          <ul>
+            <% answer.question.options.each do |option| %>
+              <li><%= option.content %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="panel-footer">
+        <p>答题记录是：
+          <% case answer.question.question_type %>
+          <% when "multiple_choice" %>
+            <%= answer.option&.content || "未作答" %>
+          <% when "sentence_completion" %>
+            <%= answer.content || "未作答" %>
+          <% when "true_or_flase_question" %>
+            <%= answer.true_answer || "未作答" %>
+          <% when "short_answer_question" %>
+            <%= answer.content || "未作答" %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>

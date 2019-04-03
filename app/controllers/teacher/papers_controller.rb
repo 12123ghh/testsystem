@@ -67,11 +67,6 @@ class Teacher::PapersController < Teacher::BaseController
     end
   end
 
-  def stu_exams
-  	@paper = Paper.find(params[:id])
-		@exams = @paper.exams.paginate(page: params[:page])
-  end
-
 	private 
 
 	def paper_params

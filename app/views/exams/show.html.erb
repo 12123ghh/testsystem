@@ -5,7 +5,7 @@
 <p>得分：<%= @exam.calculate_score %></p>
 <div>
 	<% @exam.answers.each do |answer| %>
-		<div class="panel <%= answer.is_right_answer ? "panel-success" : "panel-danger" %>">
+		<div class="panel <%= answer.is_right_answer ? "panel-success" : "panel-default" %>">
 			<div class="panel-heading">
 				<p>
 					<%= t("activerecord.attributes.question.question_types.#{answer.question.question_type}") %>
