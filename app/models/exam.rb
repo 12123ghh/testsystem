@@ -9,10 +9,7 @@ class Exam < ApplicationRecord
 
   # 计算分数
   def calculate_score
-    # 正确答案/所有答案=正确率
-    # 0 if 
-    return 0 if answers.blank?
-
-    (answers.right_answer.count.to_f / answers.count.to_f * 100).round(2)
+    # 当选择了答案之后，判断是否为正确答案并保存。
+    answers.pluck(:score).sum
   end
 end

@@ -17,6 +17,28 @@ class Answer < ApplicationRecord
   private
   def check_is_right_answer
     # 当选择了答案之后，判断是否为正确答案并保存。
-    update_column(:is_right_answer, option.is_right_answer) if option.present?
+    case question_type
+    when "multiple_choice"
+      check_multiple_choice_answer
+    when "sentence_completion"
+      check_sentence_completion_answer
+    when "true_or_flase_question"
+      check_true_or_flase_question_answer
+    end
+  end
+
+  def check_multiple_choice_answer
+    # 选择题2分
+    update_columns(is_right_answer: true, score: 2) if option.present? && option.is_right_answer
+  end
+
+  def check_sentence_completion_answer
+    # 填空题1分
+    update_columns(is_right_answer: true, score: 1) if content == question.standard_answer
+  end
+
+  def check_true_or_flase_question_answer
+    # 判断题1分
+    update_columns(is_right_answer: true, score: 1) if true_answer == question.true_answer
   end
 end
